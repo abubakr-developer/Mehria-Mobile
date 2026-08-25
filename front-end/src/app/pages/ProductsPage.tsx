@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
@@ -20,7 +22,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 1799,
     category: "Chargers",
     tag: "Sale",
-    image: "/imagegs/produts/1.jfif",
+    image: "/imagegs/products/1.jfif",
     description: "65W GaN charger, charges most phones to 50% in 20 minutes.",
   },
   {
@@ -29,7 +31,7 @@ const PRODUCTS: Product[] = [
     price: 3499,
     category: "Audio",
     tag: "Popular",
-    image: "/imagegs/produts/2.jfif",
+    image: "/imagegs/products/2.jfif",
     description: "Active noise cancellation with 30-hour total battery life.",
   },
   {
@@ -39,7 +41,7 @@ const PRODUCTS: Product[] = [
     originalPrice: 899,
     category: "Cases",
     tag: "Sale",
-    image: "/imagegs/produts/3.jfif",
+    image: "/imagegs/products/3.jfif",
     description: "Military-grade drop protection, slim profile design.",
   },
   {
@@ -48,7 +50,7 @@ const PRODUCTS: Product[] = [
     price: 349,
     category: "Accessories",
     tag: "New",
-    image: "/imagegs/produts/4.png",
+    image: "/imagegs/products/4.png",
     description: "9H hardness, ultra-clear oleophobic coating. Pack of 2.",
   },
   {
@@ -57,7 +59,7 @@ const PRODUCTS: Product[] = [
     price: 4999,
     category: "Chargers",
     tag: "Hot",
-    image: "/imagegs/produts/5.webp",
+    image: "/imagegs/products/5.webp",
     description: "10,000 mAh magnetic wireless power bank, 20W PD.",
   },
   {
@@ -66,7 +68,7 @@ const PRODUCTS: Product[] = [
     price: 449,
     category: "Cables",
     tag: "New",
-    image: "/imagegs/produts/6.jfif",
+    image: "/imagegs/products/6.jfif",
     description: "Braided nylon, supports 100W charging and 480 Mbps data.",
   },
 ];
@@ -214,7 +216,6 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const filtered = PRODUCTS.filter((p) => {
     const matchCat = activeCategory === "All" || p.category === activeCategory;
@@ -224,64 +225,6 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-[#F7F8FA] font-sans text-[#3C3837]">
-
-      {/* ── NAV ── */}
-      <nav className="bg-[#1C4B75] sticky top-0 z-50 shadow-md">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo placeholder — replace src with your logo */}
-            <div className="w-9 h-9 rounded-lg bg-[#00C2D1] flex items-center justify-center font-bold text-[#04342c] text-lg select-none">
-              M
-            </div>
-            <div>
-              <p className="text-white font-bold text-[15px] leading-tight">Mehria Mobiles</p>
-              <p className="text-[#00C2D1] text-[10px] tracking-widest uppercase">Lodhran</p>
-            </div>
-          </div>
-
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-6 text-[13px] text-white/80">
-            <a href="#" className="hover:text-[#00C2D1] transition-colors">Home</a>
-            <a href="#" className="hover:text-[#00C2D1] transition-colors">Products</a>
-            <a href="#" className="hover:text-[#00C2D1] transition-colors">Accessories</a>
-            <a href="#" className="hover:text-[#00C2D1] transition-colors">Contact</a>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button className="bg-[#00C2D1] hover:bg-[#009aaa] text-[#04342c] text-[13px] font-semibold px-4 py-2 rounded-lg transition-colors hidden md:block">
-              Shop Now
-            </button>
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden text-white p-1"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                {menuOpen
-                  ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />}
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        <div
-          style={{
-            maxHeight: menuOpen ? "200px" : "0",
-            opacity: menuOpen ? 1 : 0,
-            overflow: "hidden",
-            transition: "max-height 0.35s ease, opacity 0.3s ease",
-          }}
-          className="md:hidden bg-[#26649A] px-4"
-        >
-          {["Home", "Products", "Accessories", "Contact"].map((item) => (
-            <a key={item} href="#" className="block py-2.5 text-[13px] text-white/90 border-b border-white/10 hover:text-[#00C2D1] transition-colors">
-              {item}
-            </a>
-          ))}
-        </div>
-      </nav>
 
       {/* ── HERO BANNER ── */}
       <section className="bg-gradient-to-br from-[#26649A] to-[#1C4B75] py-14 px-4 relative overflow-hidden">

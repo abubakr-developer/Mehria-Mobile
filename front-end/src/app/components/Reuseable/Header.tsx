@@ -9,7 +9,7 @@ import { Search, ShoppingCart, Menu, MapPin, Phone, ArrowRight } from "lucide-re
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/chargers" },
-  { label: "Products", href: "/cases" },
+  { label: "Products", href: "/products" },
   { label: "Contact", href: "/contact" },
 ];
 
