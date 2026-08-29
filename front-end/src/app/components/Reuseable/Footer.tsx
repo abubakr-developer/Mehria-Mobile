@@ -1,9 +1,11 @@
 // components/Footer.tsx
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 
 const shopLinks = [
   { label: "Chargers & Cables", href: "/chargers" },
@@ -22,14 +24,25 @@ const helpLinks = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSent(true);
+    setEmail("");
+    setTimeout(() => setSent(false), 3000);
+  };
+
   return (
     <footer className="bg-[#3C3837] text-[#F7F8FA]">
-      <div className="max-w-[1240px] mx-auto px-8 pt-16 pb-8">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-16 pb-8">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-10 lg:gap-8 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-8 lg:gap-8 pb-10 sm:pb-12">
 
           {/* Brand column */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/logo-mark.png"
@@ -56,14 +69,14 @@ export default function Footer() {
             </p>
 
             <div className="flex items-center gap-2 mt-5">
-               <a
+              <a
                 href="#"
                 aria-label="Facebook"
                 className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#F7F8FA]/80 hover:bg-[#00C2D1] hover:text-[#3C3837] transition-colors"
               >
                 <FaFacebook size={16} />
               </a>
-               <a
+              <a
                 href="#"
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-[#F7F8FA]/80 hover:bg-[#00C2D1] hover:text-[#3C3837] transition-colors"
@@ -108,7 +121,7 @@ export default function Footer() {
           </div>
 
           {/* Contact + newsletter */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <h4 className="text-sm font-semibold text-white mb-4 tracking-wide">Visit or Reach Us</h4>
             <ul className="flex flex-col gap-3 mb-6">
               <li className="flex items-start gap-2.5 text-sm text-[#F7F8FA]/65">
@@ -123,7 +136,10 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5 text-sm text-[#F7F8FA]/65">
                 <Mail size={15} className="text-[#00C2D1] shrink-0" />
-                <a href="mailto:info@mehriamobiles.com" className="hover:text-[#00C2D1] transition-colors">
+                <a
+                  href="mailto:info@mehriamobiles.com"
+                  className="hover:text-[#00C2D1] transition-colors break-all"
+                >
                   info@mehriamobiles.com
                 </a>
               </li>
@@ -133,32 +149,52 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Newsletter — glass card, same language as the header */}
-            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3.5">
-              <p className="text-xs text-[#F7F8FA]/70 mb-2.5">Get new arrivals & offers</p>
-              <div className="flex items-center bg-white/5 rounded-lg overflow-hidden">
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 bg-transparent outline-none text-sm text-white placeholder:text-[#F7F8FA]/35 px-3 py-2.5"
-                />
-                <button
-                  aria-label="Subscribe"
-                  className="w-10 h-10 flex items-center justify-center bg-[#00C2D1] text-[#3C3837] hover:bg-[#00AAB8] transition-colors shrink-0"
-                >
-                  <Send size={15} />
-                </button>
-              </div>
+            {/* Newsletter — fully responsive */}
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+              <p className="text-xs font-medium text-[#F7F8FA]/70 mb-3">
+                Get new arrivals &amp; offers
+              </p>
+              <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+                {/* Input row */}
+                <div className="flex items-stretch bg-white/[0.07] rounded-lg overflow-hidden border border-white/[0.08] focus-within:border-[#00C2D1]/50 transition-colors">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    className="flex-1 min-w-0 bg-transparent outline-none text-sm text-white placeholder:text-[#F7F8FA]/35 px-3 py-2.5"
+                  />
+                  {/* Send button — always visible, never squashed */}
+                  <button
+                    type="submit"
+                    aria-label="Subscribe"
+                    className="w-11 h-11 flex items-center justify-center bg-[#00C2D1] text-[#3C3837] hover:bg-[#00AAB8] active:scale-95 transition-all shrink-0"
+                  >
+                    <Send size={15} />
+                  </button>
+                </div>
+
+                {/* Success message */}
+                {sent && (
+                  <p className="text-[11px] text-[#00C2D1] font-medium px-1">
+                    ✓ You&apos;re subscribed! Thanks.
+                  </p>
+                )}
+
+                <p className="text-[10px] text-[#F7F8FA]/30 px-1">
+                  No spam, unsubscribe anytime.
+                </p>
+              </form>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p className="text-xs text-[#F7F8FA]/45">
             © {new Date().getFullYear()} Mehria Mobiles. All rights reserved.
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 sm:gap-5">
             <Link href="/privacy" className="text-xs text-[#F7F8FA]/45 hover:text-[#00C2D1] transition-colors">
               Privacy Policy
             </Link>
