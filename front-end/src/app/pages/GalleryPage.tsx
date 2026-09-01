@@ -96,6 +96,7 @@ export default function GalleryPage() {
                   alt={item.title}
                   width={800}
                   height={600}
+                  unoptimized
                   className="h-72 w-full object-cover transition duration-500 group-hover:scale-105"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-[#26649A]/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">

@@ -147,6 +147,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           alt={product.name}
           width={800}
           height={600}
+          unoptimized
           onLoad={() => setLoaded(true)}
           onError={(e) => {
             // Falls back to a placeholder if image not found
