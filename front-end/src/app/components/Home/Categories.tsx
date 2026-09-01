@@ -21,7 +21,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section className="max-w-[1240px] mx-auto px-4 sm:px-8 py-16 lg:py-24">
+    <section className="max-w-310 mx-auto px-4 sm:px-8 py-16 lg:py-24">
       <div className="flex items-end justify-between mb-8 sm:mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

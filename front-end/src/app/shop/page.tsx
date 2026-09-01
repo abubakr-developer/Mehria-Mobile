@@ -15,195 +15,8 @@ import {
   ArrowLeft,
   Check,
 } from "lucide-react";
-
-// ─── Data ────────────────────────────────────────────────────────────────────
-
-const categories = [
-  { id: "all", label: "All Products" },
-  { id: "chargers", label: "Chargers & Cables" },
-  { id: "cases", label: "Cases & Covers" },
-  { id: "earbuds", label: "Earbuds & Audio" },
-  { id: "protectors", label: "Screen Protectors" },
-  { id: "accessories", label: "Accessories" },
-];
-
-const products = [
-  {
-    id: 1,
-    name: "20W Fast Charger",
-    price: 1200,
-    oldPrice: 1500,
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    category: "chargers",
-    rating: 4.8,
-    reviews: 42,
-    img: "/imagegs/products/1.jfif",
-    inStock: true,
-  },
-  {
-    id: 2,
-    name: "Wireless Earbuds Pro",
-    price: 3500,
-    oldPrice: 4200,
-    tag: "Popular",
-    tagColor: "#26649A",
-    tagText: "#FFFFFF",
-    category: "earbuds",
-    rating: 4.9,
-    reviews: 87,
-    img: "/imagegs/products/2.jfif",
-    inStock: true,
-  },
-  {
-    id: 3,
-    name: "Tempered Glass Protector",
-    price: 350,
-    oldPrice: null,
-    tag: "Sale",
-    tagColor: "#ef4444",
-    tagText: "#FFFFFF",
-    category: "protectors",
-    rating: 4.7,
-    reviews: 63,
-    img: "/imagegs/products/3.jfif",
-    inStock: true,
-  },
-  {
-    id: 4,
-    name: "Shockproof Silicone Case",
-    price: 800,
-    oldPrice: 1000,
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    category: "cases",
-    rating: 4.6,
-    reviews: 38,
-    img: "/imagegs/products/4.png",
-    inStock: true,
-  },
-  {
-    id: 5,
-    name: "Type-C Cable 2m",
-    price: 450,
-    oldPrice: null,
-    tag: "Popular",
-    tagColor: "#26649A",
-    tagText: "#FFFFFF",
-    category: "chargers",
-    rating: 4.5,
-    reviews: 55,
-    img: "/imagegs/products/5.webp",
-    inStock: true,
-  },
-  {
-    id: 6,
-    name: "LED Power Bank 10000mAh",
-    price: 2800,
-    oldPrice: 3500,
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    category: "accessories",
-    rating: 4.8,
-    reviews: 29,
-    img: "/imagegs/products/6.jfif",
-    inStock: true,
-  },
-  {
-    id: 7,
-    name: "Magnetic Phone Stand",
-    price: 600,
-    oldPrice: null,
-    tag: null,
-    tagColor: "",
-    tagText: "",
-    category: "accessories",
-    rating: 4.4,
-    reviews: 18,
-    img: "/imagegs/products/1.jfif",
-    inStock: false,
-  },
-  {
-    id: 8,
-    name: "Leather Flip Cover",
-    price: 950,
-    oldPrice: 1200,
-    tag: "Sale",
-    tagColor: "#ef4444",
-    tagText: "#FFFFFF",
-    category: "cases",
-    rating: 4.7,
-    reviews: 31,
-    img: "/imagegs/products/4.png",
-    inStock: true,
-  },
-  {
-    id: 9,
-    name: "Clear Back Case",
-    price: 400,
-    oldPrice: null,
-    tag: null,
-    tagColor: "",
-    tagText: "",
-    category: "cases",
-    rating: 4.3,
-    reviews: 22,
-    img: "/imagegs/products/3.jfif",
-    inStock: true,
-  },
-  {
-    id: 10,
-    name: "Wired Earphones",
-    price: 700,
-    oldPrice: 900,
-    tag: "Sale",
-    tagColor: "#ef4444",
-    tagText: "#FFFFFF",
-    category: "earbuds",
-    rating: 4.5,
-    reviews: 46,
-    img: "/imagegs/products/2.jfif",
-    inStock: true,
-  },
-  {
-    id: 11,
-    name: "USB-A to Lightning Cable",
-    price: 380,
-    oldPrice: null,
-    tag: null,
-    tagColor: "",
-    tagText: "",
-    category: "chargers",
-    rating: 4.4,
-    reviews: 27,
-    img: "/imagegs/products/5.webp",
-    inStock: true,
-  },
-  {
-    id: 12,
-    name: "Anti-Spy Screen Protector",
-    price: 550,
-    oldPrice: 700,
-    tag: "Popular",
-    tagColor: "#26649A",
-    tagText: "#FFFFFF",
-    category: "protectors",
-    rating: 4.6,
-    reviews: 34,
-    img: "/imagegs/products/6.jfif",
-    inStock: true,
-  },
-];
-
-const sortOptions = [
-  { id: "popular", label: "Most Popular" },
-  { id: "price-asc", label: "Price: Low to High" },
-  { id: "price-desc", label: "Price: High to Low" },
-  { id: "rating", label: "Top Rated" },
-];
+import { products, categories, sortOptions } from "@/app/data/products";
+import { useCart } from "@/app/context/CartContext";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -213,13 +26,16 @@ export default function ShopPage() {
   const [sort, setSort] = useState("popular");
   const [sortOpen, setSortOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [cart, setCart] = useState<number[]>([]);
   const [added, setAdded] = useState<number | null>(null);
+  const { addToCart, cartCount } = useCart();
 
-  const addToCart = (id: number) => {
-    setCart((prev) => [...prev, id]);
-    setAdded(id);
-    setTimeout(() => setAdded(null), 1500);
+  const handleAddToCart = (id: number) => {
+    const product = products.find((p) => p.id === id);
+    if (product) {
+      addToCart(product);
+      setAdded(id);
+      setTimeout(() => setAdded(null), 1500);
+    }
   };
 
   const filtered = useMemo(() => {
@@ -427,11 +243,11 @@ export default function ShopPage() {
                   <> in <span className="text-[#26649A]">{categories.find(c => c.id === selectedCat)?.label}</span></>
                 )}
               </p>
-              {cart.length > 0 && (
-                <div className="flex items-center gap-1.5 text-xs text-[#26649A] font-medium">
+              {cartCount > 0 && (
+                <Link href="/cart" className="flex items-center gap-1.5 text-xs text-[#26649A] font-medium hover:text-[#00C2D1] transition-colors">
                   <ShoppingCart size={13} />
-                  {cart.length} in cart
-                </div>
+                  {cartCount} in cart
+                </Link>
               )}
             </div>
 
@@ -490,7 +306,7 @@ export default function ShopPage() {
                         {product.inStock && (
                           <motion.button
                             whileTap={{ scale: 0.92 }}
-                            onClick={() => addToCart(product.id)}
+                            onClick={() => handleAddToCart(product.id)}
                             className="absolute bottom-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-[#26649A] opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
                           >
                             {added === product.id ? (
@@ -531,7 +347,7 @@ export default function ShopPage() {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.92 }}
-                              onClick={() => addToCart(product.id)}
+                              onClick={() => handleAddToCart(product.id)}
                               className={`flex items-center justify-center gap-1.5 text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all ${
                                 added === product.id
                                   ? "bg-green-500 text-white"
@@ -564,7 +380,7 @@ export default function ShopPage() {
 
       {/* ── Floating cart badge (mobile) ──────────────── */}
       <AnimatePresence>
-        {cart.length > 0 && (
+        {cartCount > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -572,13 +388,13 @@ export default function ShopPage() {
             transition={{ type: "spring", stiffness: 350, damping: 28 }}
             className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 sm:hidden"
           >
-            <button className="flex items-center gap-2.5 bg-[#3C3837] text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
+            <Link href="/cart" className="flex items-center gap-2.5 bg-[#3C3837] text-white text-sm font-semibold px-5 py-3 rounded-full shadow-lg">
               <ShoppingCart size={15} />
-              {cart.length} item{cart.length !== 1 ? "s" : ""} in cart
+              {cartCount} item{cartCount !== 1 ? "s" : ""} in cart
               <span className="ml-1 bg-[#00C2D1] text-[#3C3837] text-[10px] font-bold px-1.5 py-0.5 rounded-full">
                 View
               </span>
-            </button>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

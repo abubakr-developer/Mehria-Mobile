@@ -14,6 +14,7 @@ import {
   Phone,
   ArrowRight,
 } from "lucide-react";
+import { useCart } from "@/app/context/CartContext";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -26,6 +27,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { cartCount } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -138,15 +140,18 @@ export default function Navbar() {
             </div>
 
             {/* Cart */}
-            <button
+            <Link
+              href="/cart"
               className="relative w-9 h-9 flex items-center justify-center rounded-lg text-[#3C3837] hover:bg-[#26649A]/[0.08] hover:text-[#26649A] transition-colors"
               aria-label="Cart"
             >
               <ShoppingCart size={18} />
-              <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-[#00C2D1] text-[#3C3837] rounded-full text-[10px] font-semibold flex items-center justify-center">
-                2
-              </span>
-            </button>
+              {cartCount > 0 && (
+                <span className="absolute top-0.5 right-0.5 w-4 h-4 bg-[#00C2D1] text-[#3C3837] rounded-full text-[10px] font-semibold flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
 
             {/* Shop Now — hidden on mobile */}
             <Link

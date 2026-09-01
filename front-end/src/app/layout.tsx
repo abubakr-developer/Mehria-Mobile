@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/app/components/Reuseable/Header"
 import Footer from "./components/Reuseable/Footer";
+import ClientProviders from "./components/Reuseable/ClientProviders";
 import "./globals.css";  
 export const metadata: Metadata = {
   title: {
@@ -74,9 +75,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={` h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <ClientProviders>
         <Header/>
         {children}
         <Footer/>
+        </ClientProviders>
         </body>
     </html>
   );

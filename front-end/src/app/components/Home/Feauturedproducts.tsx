@@ -2,61 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Plus, ShoppingCart } from "lucide-react";
+import { ArrowRight, Plus, ShoppingCart, Check } from "lucide-react";
+import { products } from "@/app/data/products";
+import { useCart } from "@/app/context/CartContext";
 
-const featuredProducts = [
-  {
-    name: "20W Fast Charger",
-    price: "Rs. 1,200",
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    img: "/imagegs/products/1.jfif",
-  },
-  {
-    name: "Wireless Earbuds Pro",
-    price: "Rs. 3,500",
-    tag: "Popular",
-    tagColor: "#26649A",
-    tagText: "#FFFFFF",
-    img: "/imagegs/products/2.jfif",
-  },
-  {
-    name: "Tempered Glass Protector",
-    price: "Rs. 350",
-    tag: "Sale",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    img: "/imagegs/products/3.jfif",
-  },
-  {
-    name: "Shockproof Silicone Case",
-    price: "Rs. 800",
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    img: "/imagegs/products/4.png",
-  },
-  {
-    name: "Type-C Cable 2m",
-    price: "Rs. 450",
-    tag: "Popular",
-    tagColor: "#26649A",
-    tagText: "#FFFFFF",
-    img: "/imagegs/products/5.webp",
-  },
-  {
-    name: "LED Power Bank",
-    price: "Rs. 2,800",
-    tag: "New",
-    tagColor: "#00C2D1",
-    tagText: "#3C3837",
-    img: "/imagegs/products/6.jfif",
-  },
-];
+const featuredProducts = products.slice(0, 6);
 
 export default function FeaturedProducts() {
+  const { addToCart } = useCart();
+  const [added, setAdded] = useState<number | null>(null);
+
+  const handleAdd = (id: number) => {
+    const product = products.find((p) => p.id === id);
+    if (product) {
+      addToCart(product);
+      setAdded(id);
+      setTimeout(() => setAdded(null), 1500);
+    }
+  };
+
   return (
     <section className="bg-white py-16 lg:py-24 border-t border-[#3C3837]/[0.06]">
       <div className="max-w-[1240px] mx-auto px-4 sm:px-8">
@@ -95,12 +61,14 @@ export default function FeaturedProducts() {
             >
               {/* Image */}
               <div className="relative h-28 sm:h-32 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
-                <span
-                  className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md z-10"
-                  style={{ backgroundColor: product.tagColor, color: product.tagText }}
-                >
-                  {product.tag}
-                </span>
+                {product.tag && (
+                  <span
+                    className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md z-10"
+                    style={{ backgroundColor: product.tagColor, color: product.tagText }}
+                  >
+                    {product.tag}
+                  </span>
+                )}
                 <Image
                   src={product.img}
                   alt={product.name}
@@ -112,17 +80,29 @@ export default function FeaturedProducts() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={() => handleAdd(product.id)}
                   className="absolute bottom-2 right-2 w-7 h-7 rounded-full bg-white shadow-md flex items-center justify-center text-[#26649A] opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 z-10"
                 >
-                  <Plus size={14} />
+                  {added === product.id ? (
+                    <Check size={14} className="text-green-500" />
+                  ) : (
+                    <Plus size={14} />
+                  )}
                 </motion.button>
               </div>
 
               <p className="text-[12px] sm:text-[13.5px] font-medium text-[#3C3837] leading-snug line-clamp-2">{product.name}</p>
               <div className="flex items-center justify-between mt-1.5">
-                <p className="text-[13px] sm:text-[14px] font-semibold text-[#26649A]">{product.price}</p>
-                <button className="hidden sm:flex w-7 h-7 rounded-lg bg-[#26649A]/[0.07] items-center justify-center text-[#26649A] hover:bg-[#00C2D1] hover:text-[#3C3837] transition-colors">
-                  <ShoppingCart size={13} />
+                <p className="text-[13px] sm:text-[14px] font-semibold text-[#26649A]">Rs. {product.price.toLocaleString()}</p>
+                <button
+                  onClick={() => handleAdd(product.id)}
+                  className={`hidden sm:flex w-7 h-7 rounded-lg items-center justify-center transition-colors ${
+                    added === product.id
+                      ? "bg-green-500/10 text-green-500"
+                      : "bg-[#26649A]/[0.07] text-[#26649A] hover:bg-[#00C2D1] hover:text-[#3C3837]"
+                  }`}
+                >
+                  {added === product.id ? <Check size={13} /> : <ShoppingCart size={13} />}
                 </button>
               </div>
             </motion.div>
