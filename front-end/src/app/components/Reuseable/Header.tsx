@@ -19,6 +19,7 @@ import { useCart } from "@/app/context/CartContext";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Products", href: "/products" },
   { label: "Contact", href: "/contact" },
 ];
