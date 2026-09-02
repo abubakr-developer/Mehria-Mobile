@@ -9,6 +9,7 @@ import {
   Star,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
   BatteryCharging,
   ShieldCheck,
   Smartphone,
@@ -67,6 +68,23 @@ const textVariants = {
   exit:   { opacity: 0, y: -10, transition: { duration: 0.3 } },
 };
 
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+  },
+};
+
 export default function Hero() {
   const [index, setIndex]   = useState(0);
   const [dir, setDir]       = useState(1);
@@ -100,9 +118,8 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-        <motion.div variants={container} initial="hidden" animate="show">
+      <div className="max-w-[1240px] mx-auto px-3 sm:px-8 pt-4 pb-10 sm:pt-16 sm:pb-20 lg:pt-28 lg:pb-32 grid gap-6 lg:grid-cols-2 lg:gap-12 lg:gap-16 items-center">
+        <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
           <motion.span
             variants={item}
             className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.04em] text-[#26649A] bg-[#26649A]/[0.07] border border-[#26649A]/[0.12] px-3.5 py-1.5 rounded-full mb-6"
@@ -149,7 +166,6 @@ export default function Hero() {
             </a>
           </motion.div>
 
-          {/* Trust badge row */}
           <motion.div variants={item} className="mt-8 flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-1">
               <MapPin size={13} className="text-[#26649A]" />
@@ -162,53 +178,50 @@ export default function Hero() {
               ))}
               <span className="ml-1.5 text-[12px] text-[#3C3837]/50">500+ happy customers</span>
             </div>
+          </motion.div>
+        </motion.div>
 
-            {/* ── RIGHT: Image box ───────────────────────────────────────── */}
-            <div className="hidden sm:flex flex-shrink-0 items-center justify-center relative"
-              style={{ width: "clamp(240px, 38%, 480px)", height: "clamp(220px, 34vw, 400px)" }}
+        <div className="order-1 lg:order-2 flex items-center justify-center relative mx-auto w-full max-w-full sm:max-w-[480px]"
+          style={{ height: "clamp(220px, 68vw, 420px)" }}
+        >
+          <button
+            onClick={() => go(index - 1)}
+            aria-label="Previous slide"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
+          >
+            <ChevronLeft size={18} className="text-[#3C3837]" />
+          </button>
+          <button
+            onClick={() => go(index + 1)}
+            aria-label="Next slide"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
+          >
+            <ChevronRight size={18} className="text-[#3C3837]" />
+          </button>
+
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={slide.id + "-img"}
+              custom={dir}
+              variants={imgVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="w-full h-full rounded-2xl overflow-hidden bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)] relative"
             >
-              {/* Prev / Next arrows — positioned on the image box edges */}
-              <button
-                onClick={() => go(index - 1)}
-                aria-label="Previous slide"
-                className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-gray-50 shadow-md flex items-center justify-center transition-all"
-              >
-                <ChevronLeft size={18} className="text-[#3C3837]" />
-              </button>
-              <button
-                onClick={() => go(index + 1)}
-                aria-label="Next slide"
-                className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white hover:bg-gray-50 shadow-md flex items-center justify-center transition-all"
-              >
-                <ChevronRight size={18} className="text-[#3C3837]" />
-              </button>
-
-              {/* Contained image card */}
-              <AnimatePresence mode="wait" custom={dir}>
-                <motion.div
-                  key={slide.id + "-img"}
-                  custom={dir}
-                  variants={imgVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="w-full h-full rounded-2xl overflow-hidden bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
-                >
-                  <Image
-                    src={slide.image}
-                    alt={slide.headline}
-                    fill
-                    priority
-                    className="object-contain object-center p-4"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-          </div>
+              <Image
+                src={slide.image}
+                alt={slide.headline}
+                fill
+                priority
+                className="object-cover object-center"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
