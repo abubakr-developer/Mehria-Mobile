@@ -68,6 +68,12 @@ export default function Hero() {
               Shop accessories
               <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 border border-[#3C3837]/12 hover:border-[#26649A]/40 hover:bg-[#26649A]/[0.04] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
+            >
+              View products
+            </Link>
             <a
               href="tel:+923001234567"
               className="inline-flex items-center gap-2 border border-[#3C3837]/12 hover:border-[#26649A]/40 hover:bg-[#26649A]/[0.04] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"

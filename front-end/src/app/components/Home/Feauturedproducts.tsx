@@ -59,6 +59,7 @@ export default function FeaturedProducts() {
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="group bg-[#F7F8FA] rounded-2xl p-3 sm:p-4 border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
             >
+              <Link href={`/products/${product.id}`} className="block">
               {/* Image */}
               <div className="relative h-28 sm:h-32 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
                 {product.tag && (
@@ -80,7 +81,11 @@ export default function FeaturedProducts() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => handleAdd(product.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleAdd(product.id);
+                  }}
                   className="absolute bottom-2 right-2 w-7 h-7 rounded-full bg-white shadow-md flex items-center justify-center text-[#26649A] opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300 z-10"
                 >
                   {added === product.id ? (
@@ -95,7 +100,11 @@ export default function FeaturedProducts() {
               <div className="flex items-center justify-between mt-1.5">
                 <p className="text-[13px] sm:text-[14px] font-semibold text-[#26649A]">Rs. {product.price.toLocaleString()}</p>
                 <button
-                  onClick={() => handleAdd(product.id)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleAdd(product.id);
+                  }}
                   className={`hidden sm:flex w-7 h-7 rounded-lg items-center justify-center transition-colors ${
                     added === product.id
                       ? "bg-green-500/10 text-green-500"
@@ -105,6 +114,7 @@ export default function FeaturedProducts() {
                   {added === product.id ? <Check size={13} /> : <ShoppingCart size={13} />}
                 </button>
               </div>
+              </Link>
             </motion.div>
           ))}
         </div>
