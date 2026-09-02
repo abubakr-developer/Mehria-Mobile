@@ -57,11 +57,11 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group bg-[#F7F8FA] rounded-2xl p-3 sm:p-4 border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
+              className="group bg-[#F7F8FA] rounded-2xl p-3 h-72 sm:p-4 border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
             >
               <Link href={`/products/${product.id}`} className="block">
               {/* Image */}
-              <div className="relative h-28 sm:h-32 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
+              <div className="relative h-40 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
                 {product.tag && (
                   <span
                     className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md z-10"
