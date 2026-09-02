@@ -214,6 +214,7 @@ export default function Hero() {
                 alt={slide.headline}
                 fill
                 priority
+                unoptimized
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 onError={(e) => {
