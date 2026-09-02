@@ -99,77 +99,68 @@ export default function Hero() {
   const slide = SLIDES[index];
 
   return (
-    <section className="bg-[#F7F8FA] overflow-x-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 pt-16 pb-20 lg:pt-28 lg:pb-32 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-      {/* ── CAROUSEL ─────────────────────────────────────────────────────────── */}
-      <div
-        className="relative w-full"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
-        <div className="max-w-[1240px] mx-auto px-6 sm:px-10">
-          <div
-            className="flex items-center justify-between gap-8"
-            style={{ minHeight: "clamp(260px, 38vw, 440px)" }}
+        <motion.div variants={container} initial="hidden" animate="show">
+          <motion.span
+            variants={item}
+            className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.04em] text-[#26649A] bg-[#26649A]/[0.07] border border-[#26649A]/[0.12] px-3.5 py-1.5 rounded-full mb-6"
           >
+            <motion.span
+              className="w-1.5 h-1.5 rounded-full bg-[#00C2D1]"
+              animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            Trusted in Lodhran since 2019
+          </motion.span>
 
-            {/* ── LEFT: Text content ─────────────────────────────────────── */}
-            <div className="flex-1 flex flex-col justify-center py-10 min-w-0">
-              <AnimatePresence mode="wait" custom={dir}>
-                <motion.div
-                  key={slide.id + "-text"}
-                  custom={dir}
-                  variants={textVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                >
-                  <p className="text-[11px] font-semibold tracking-[0.12em] text-[#26649A] mb-3 uppercase">
-                    Mehria Mobiles · Lodhran
-                  </p>
+          <motion.h1
+            variants={item}
+            className="text-[34px] sm:text-5xl lg:text-[58px] font-semibold leading-[1.05] tracking-[-0.02em] text-[#3C3837]"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+          >
+            Everything your phone needs,{" "}
+            <span className="text-[#26649A]">under one roof.</span>
+          </motion.h1>
 
-                  <h1
-                    className="text-[28px] sm:text-4xl lg:text-[48px] font-bold leading-[1.08] tracking-[-0.02em] text-[#3C3837] max-w-md"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
-                    {slide.headline}
-                  </h1>
+          <motion.p
+            variants={item}
+            className="mt-5 text-[15px] text-[#3C3837]/60 leading-relaxed max-w-md"
+          >
+            From fast chargers to shockproof cases and crystal-clear screen
+            protectors — genuine mobile accessories, sourced and sold right
+            here in Lodhran.
+          </motion.p>
 
-                  <p className="mt-3 text-[14px] sm:text-[15px] text-[#3C3837]/60 max-w-sm leading-relaxed">
-                    {slide.sub}
-                  </p>
+          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href="/shop"
+              className="group inline-flex items-center gap-2 bg-[#00C2D1] hover:bg-[#00AAB8] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-all active:scale-[0.97] shadow-[0_8px_20px_rgba(0,194,209,0.25)] hover:shadow-[0_10px_26px_rgba(0,194,209,0.35)]"
+            >
+              Shop accessories
+              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+            <a
+              href="tel:+923001234567"
+              className="inline-flex items-center gap-2 border border-[#3C3837]/12 hover:border-[#26649A]/40 hover:bg-[#26649A]/[0.04] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
+            >
+              Call the shop
+            </a>
+          </motion.div>
 
-                  <div className="mt-7">
-                    <Link
-                      href={slide.href}
-                      className="inline-flex items-center gap-2 text-[#3C3837] text-[13px] font-semibold border border-[#3C3837]/25 hover:border-[#3C3837]/60 px-5 py-2.5 rounded-full transition-colors"
-                      style={{ background: "rgba(255,255,255,0.85)", backdropFilter: "blur(8px)" }}
-                    >
-                      {slide.cta}
-                      <ChevronRight size={14} />
-                    </Link>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Dot indicators */}
-              <div className="flex items-center gap-2 mt-8">
-                {SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => go(i)}
-                    aria-label={`Go to slide ${i + 1}`}
-                    className="transition-all duration-300 rounded-full"
-                    style={{
-                      width:  i === index ? 24 : 7,
-                      height: 7,
-                      background: i === index ? slide.accent : "rgba(60,56,55,0.25)",
-                    }}
-                  />
-                ))}
-              </div>
+          {/* Trust badge row */}
+          <motion.div variants={item} className="mt-8 flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-1">
+              <MapPin size={13} className="text-[#26649A]" />
+              <span className="text-[12px] text-[#3C3837]/50">Lodhran, Punjab</span>
+            </div>
+            <span className="w-1 h-1 rounded-full bg-[#3C3837]/20" />
+            <div className="flex items-center gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={11} fill="#00C2D1" strokeWidth={0} />
+              ))}
+              <span className="ml-1.5 text-[12px] text-[#3C3837]/50">500+ happy customers</span>
             </div>
 
             {/* ── RIGHT: Image box ───────────────────────────────────────── */}

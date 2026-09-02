@@ -278,8 +278,9 @@ export default function ShopPage() {
                       transition={{ duration: 0.35, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
                       className="group bg-white rounded-2xl border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:shadow-[0_12px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300 overflow-hidden flex flex-col"
                     >
-                      {/* Image */}
-                      <div className="relative aspect-square bg-[#F7F8FA] overflow-hidden">
+                      <Link href={`/products/${product.id}`} className="block">
+                        {/* Image */}
+                        <div className="relative aspect-square bg-[#F7F8FA] overflow-hidden">
                         {product.tag && (
                           <span
                             className="absolute top-2 left-2 z-10 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md"
@@ -306,7 +307,11 @@ export default function ShopPage() {
                         {product.inStock && (
                           <motion.button
                             whileTap={{ scale: 0.92 }}
-                            onClick={() => handleAddToCart(product.id)}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleAddToCart(product.id);
+                            }}
                             className="absolute bottom-2 right-2 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-[#26649A] opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300"
                           >
                             {added === product.id ? (
@@ -347,7 +352,11 @@ export default function ShopPage() {
                             <motion.button
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.92 }}
-                              onClick={() => handleAddToCart(product.id)}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleAddToCart(product.id);
+                              }}
                               className={`flex items-center justify-center gap-1.5 text-[11px] sm:text-xs font-semibold px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all ${
                                 added === product.id
                                   ? "bg-green-500 text-white"
@@ -369,6 +378,7 @@ export default function ShopPage() {
                           )}
                         </div>
                       </div>
+                      </Link>
                     </motion.div>
                   ))}
                 </motion.div>
