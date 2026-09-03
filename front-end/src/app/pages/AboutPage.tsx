@@ -1,6 +1,9 @@
+import PageReveal from "../components/Reuseable/PageReveal";
+
 export default function AboutPage() {
   return (
-    <main className="bg-[#F7F8FA] text-[#3C3837]">
+    <PageReveal>
+      <main className="bg-[#F7F8FA] text-[#3C3837]">
       <section className="relative overflow-hidden bg-[#26649A]">
         <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#00C2D1]/20" />
         <div className="absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#1C4B75]/40" />
@@ -243,7 +246,7 @@ export default function AboutPage() {
           <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
             <div>
               <span className="text-sm font-bold uppercase tracking-widest text-[#00C2D1]">
-                Let's Work Together
+                Let&apos;s Work Together
               </span>
 
               <h2 className="mt-3 text-3xl font-bold text-white sm:text-4xl">
@@ -265,6 +268,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </PageReveal>
   );
 }

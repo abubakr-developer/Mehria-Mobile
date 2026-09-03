@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import PageReveal from "../components/Reuseable/PageReveal";
 
 interface Product {
   id: number;
@@ -225,7 +226,8 @@ export default function ProductsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-[#F7F8FA] font-sans text-[#3C3837]">
+    <PageReveal>
+      <div className="min-h-screen bg-[#F7F8FA] font-sans text-[#3C3837]">
 
       {/* ── HERO BANNER ── */}
       <section className="bg-gradient-to-br from-[#26649A] to-[#1C4B75] py-14 px-4 relative overflow-hidden">
@@ -352,5 +354,6 @@ export default function ProductsPage() {
         <p>© {new Date().getFullYear()} All rights reserved. Genuine products. Trusted service.</p>
       </footer>
     </div>
+    </PageReveal>
   );
 }

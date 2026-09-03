@@ -1,6 +1,9 @@
+import PageReveal from "../components/Reuseable/PageReveal";
+
 export default function ContactPage() {
   return (
-    <main className="bg-[#F7F8FA] text-[#3C3837]">
+    <PageReveal>
+      <main className="bg-[#F7F8FA] text-[#3C3837]">
       <section className="bg-[#26649A]">
         <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
@@ -129,7 +132,7 @@ export default function ContactPage() {
             </span>
 
             <h2 className="mt-3 text-3xl font-bold text-[#1C4B75]">
-              Let's Talk About Your Requirements
+              Let&apos;s Talk About Your Requirements
             </h2>
 
             <p className="mt-4 leading-7 text-[#3C3837]/70">
@@ -222,7 +225,7 @@ export default function ContactPage() {
               </h2>
 
               <p className="mt-5 leading-7 text-white/75">
-                We're located at Kumboh Plaza on Multan Road in Lodhran. Visit
+                We&apos;re located at Kumboh Plaza on Multan Road in Lodhran. Visit
                 us for your mobile phone and accessory requirements.
               </p>
             </div>
@@ -308,6 +311,7 @@ export default function ContactPage() {
           </p>
         </div>
       </section>
-    </main>
+      </main>
+    </PageReveal>
   );
 }
