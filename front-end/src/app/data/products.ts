@@ -64,7 +64,7 @@ export const products: Product[] = [
     category: "protectors",
     rating: 4.7,
     reviews: 63,
-    img: "/imagegs/products/3.jfif",
+    img: "/imagegs/products/4.png",
     inStock: true,
   },
   {
@@ -78,7 +78,7 @@ export const products: Product[] = [
     category: "cases",
     rating: 4.6,
     reviews: 38,
-    img: "/imagegs/products/4.png",
+    img: "/imagegs/products/3.jfif",
     inStock: true,
   },
   {
@@ -92,7 +92,7 @@ export const products: Product[] = [
     category: "chargers",
     rating: 4.5,
     reviews: 55,
-    img: "/imagegs/products/5.webp",
+    img: "/imagegs/products/6.jfif",
     inStock: true,
   },
   {
@@ -106,7 +106,7 @@ export const products: Product[] = [
     category: "accessories",
     rating: 4.8,
     reviews: 29,
-    img: "/imagegs/products/6.jfif",
+    img: "/imagegs/products/5.webp",
     inStock: true,
   },
   {

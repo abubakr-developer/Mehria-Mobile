@@ -19,12 +19,12 @@ import {
 // ─── Slide data ───────────────────────────────────────────────────────────────
 const SLIDES = [
   {
-    id: 1,
-    headline: "Mix. Match. MagSafe.",
-    sub: "Snap on a case, wallet, wireless charger, or battery pack.",
-    cta: "Shop Collection",
-    href: "/shop",
-    image: "/imagegs/products/1.jfif",
+  id: 1,
+  headline: "Wireless Freedom. Pure Sound.",
+  sub: "Crystal-clear audio with deep bass. 24-hour battery life for all-day listening.",
+  cta: "Shop Earbuds",
+  href: "/shop?cat=earbuds",
+  image: "/imagegs/products/airbuds.webp",
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const SLIDES = [
     sub: "65W GaN technology. Full charge before your tea goes cold.",
     cta: "Browse Chargers",
     href: "/shop?cat=chargers",
-    image: "/imagegs/products/2.jfif",
+    image: "/imagegs/products/charger.webp",
   },
   {
     id: 3,
@@ -40,7 +40,31 @@ const SLIDES = [
     sub: "Military-grade cases and 9H tempered glass for every model.",
     cta: "See Protection",
     href: "/shop?cat=cases",
-    image: "/imagegs/products/3.jfif",
+    image: "/imagegs/products/glass.avif",
+  },
+  {
+    id: 4,
+    headline: "Style Meets Protection.",
+    sub: "Shockproof cases that look premium. Slim fit with military-grade drop protection.",
+    cta: "Browse Cases",
+    href: "/shop?cat=phone-cases",
+    image: "/imagegs/products/case.webp",
+  },
+  {
+    id: 6,
+    headline: "Fast Sync. Fast Charge.",
+    sub: "Braided nylon Type-C cable. 100W PD support with data transfer speeds up to 480Mbps.",
+    cta: "Shop Cables",
+    href: "/shop?cat=cables",
+    image: "/imagegs/products/type-c.jpg",
+  },
+  {
+    id: 7,
+    headline: "Power That Lasts.",
+    sub: "20000mAh portable charger. Fast charges 3 devices simultaneously for days on the go.",
+    cta: "Explore Power Banks",
+    href: "/shop?cat=power-banks",
+    image: "/imagegs/products/powerbank.webp",
   },
 ];
 
