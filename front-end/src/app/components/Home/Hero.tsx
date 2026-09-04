@@ -25,7 +25,6 @@ const SLIDES = [
     cta: "Shop Collection",
     href: "/shop",
     image: "/imagegs/products/1.jfif",
-    accent: "#00C2D1",
   },
   {
     id: 2,
@@ -34,7 +33,6 @@ const SLIDES = [
     cta: "Browse Chargers",
     href: "/shop?cat=chargers",
     image: "/imagegs/products/2.jfif",
-    accent: "#26649A",
   },
   {
     id: 3,
@@ -43,71 +41,55 @@ const SLIDES = [
     cta: "See Protection",
     href: "/shop?cat=cases",
     image: "/imagegs/products/3.jfif",
-    accent: "#1C4B75",
   },
 ];
 
 // ─── Trust badges ─────────────────────────────────────────────────────────────
 const BADGES = [
-  { icon: BatteryCharging, label: "Fast Chargers",     sub: "40+ in stock" },
-  { icon: ShieldCheck,     label: "Tempered Glass",    sub: "60+ in stock" },
-  { icon: Headphones,      label: "Earbuds & Audio",   sub: "25+ models"   },
-  { icon: Smartphone,      label: "All Phone Models",  sub: "120+ covers"  },
+  { icon: BatteryCharging, label: "Fast Chargers", sub: "40+ in stock" },
+  { icon: ShieldCheck, label: "Tempered Glass", sub: "60+ in stock" },
+  { icon: Headphones, label: "Earbuds & Audio", sub: "25+ models" },
+  { icon: Smartphone, label: "All Phone Models", sub: "120+ covers" },
 ];
 
-// ─── Slide transition variants ────────────────────────────────────────────────
+// ─── Transition variants ──────────────────────────────────────────────────────
+const contentVariants = {
+  enter: { opacity: 0, y: 14 },
+  center: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.3 } },
+};
+
 const imgVariants = {
-  enter:  (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
-  center: { x: 0, opacity: 1, transition: { duration: 0.5, ease: [0.32, 0.72, 0, 1] as [number,number,number,number] } },
-  exit:   (dir: number) => ({ x: dir > 0 ? -60 : 60, opacity: 0, transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] as [number,number,number,number] } }),
-};
-
-const textVariants = {
-  enter:  { opacity: 0, y: 16 },
-  center: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] } },
-  exit:   { opacity: 0, y: -10, transition: { duration: 0.3 } },
-};
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 18 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
+  enter: (dir: number) => ({ x: dir > 0 ? 50 : -50, opacity: 0 }),
+  center: { x: 0, opacity: 1, transition: { duration: 0.5, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
+  exit: (dir: number) => ({ x: dir > 0 ? -50 : 50, opacity: 0, transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } }),
 };
 
 export default function Hero() {
-  const [index, setIndex]   = useState(0);
-  const [dir, setDir]       = useState(1);
+  const [index, setIndex] = useState(0);
+  const [dir, setDir] = useState(1);
   const [paused, setPaused] = useState(false);
-  const touchStart          = useRef<number | null>(null);
+  const touchStart = useRef<number | null>(null);
+  const indexRef = useRef(index);
+  indexRef.current = index;
 
-  const go = useCallback(
-    (next: number) => {
-      const wrapped = (next + SLIDES.length) % SLIDES.length;
-      setDir(next > index ? 1 : -1);
-      setIndex(wrapped);
-    },
-    [index]
-  );
+  const go = useCallback((next: number) => {
+    setDir(next > indexRef.current ? 1 : -1);
+    setIndex((next + SLIDES.length) % SLIDES.length);
+  }, []);
 
+  // Auto-scroller — advances every 5s, pauses on hover/touch, cleans up properly
   useEffect(() => {
     if (paused) return;
-    const id = setTimeout(() => go(index + 1), 5000);
-    return () => clearTimeout(id);
-  }, [index, paused, go]);
+    const id = setInterval(() => {
+      setDir(1);
+      setIndex((prev) => (prev + 1) % SLIDES.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, [paused]);
 
   const onTouchStart = (e: React.TouchEvent) => (touchStart.current = e.touches[0].clientX);
-  const onTouchEnd   = (e: React.TouchEvent) => {
+  const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStart.current === null) return;
     const delta = touchStart.current - e.changedTouches[0].clientX;
     if (Math.abs(delta) > 40) go(index + (delta > 0 ? 1 : -1));
@@ -118,96 +100,74 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
-      <div className="max-w-[1240px] mx-auto px-3 sm:px-8 pt-4 pb-10 sm:pt-16 sm:pb-20 lg:pt-28 lg:pb-32 grid gap-6 lg:grid-cols-2 lg:gap-12 lg:gap-16 items-center">
-        <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
-          <motion.span
-            variants={item}
-            className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.04em] text-[#26649A] bg-[#26649A]/[0.07] border border-[#26649A]/[0.12] px-3.5 py-1.5 rounded-full mb-6"
-          >
-            <motion.span
-              className="w-1.5 h-1.5 rounded-full bg-[#00C2D1]"
-              animate={{ scale: [1, 1.4, 1], opacity: [1, 0.6, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-            Trusted in Lodhran since 2019
-          </motion.span>
-
-          <motion.h1
-            variants={item}
-            className="text-[34px] sm:text-5xl lg:text-[58px] font-semibold leading-[1.05] tracking-[-0.02em] text-[#3C3837]"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            Everything your phone needs,{" "}
-            <span className="text-[#26649A]">under one roof.</span>
-          </motion.h1>
-
-          <motion.p
-            variants={item}
-            className="mt-5 text-[15px] text-[#3C3837]/60 leading-relaxed max-w-md"
-          >
-            From fast chargers to shockproof cases and crystal-clear screen
-            protectors — genuine mobile accessories, sourced and sold right
-            here in Lodhran.
-          </motion.p>
-
-          <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
-            <Link
-              href="/shop"
-              className="group inline-flex items-center gap-2 bg-[#00C2D1] hover:bg-[#00AAB8] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-all active:scale-[0.97] shadow-[0_8px_20px_rgba(0,194,209,0.25)] hover:shadow-[0_10px_26px_rgba(0,194,209,0.35)]"
-            >
-              Shop accessories
-              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <a
-              href="tel:+923001234567"
-              className="inline-flex items-center gap-2 border border-[#3C3837]/12 hover:border-[#26649A]/40 hover:bg-[#26649A]/[0.04] text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
-            >
-              Call the shop
-            </a>
-          </motion.div>
-
-          <motion.div variants={item} className="mt-8 flex items-center gap-3 flex-wrap">
-            <div className="flex items-center gap-1">
-              <MapPin size={13} className="text-[#26649A]" />
-              <span className="text-[12px] text-[#3C3837]/50">Lodhran, Punjab</span>
-            </div>
-            <span className="w-1 h-1 rounded-full bg-[#3C3837]/20" />
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={11} fill="#00C2D1" strokeWidth={0} />
-              ))}
-              <span className="ml-1.5 text-[12px] text-[#3C3837]/50">500+ happy customers</span>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        <div className="order-1 lg:order-2 flex items-center justify-center relative mx-auto w-full max-w-full sm:max-w-[480px]"
-          style={{ height: "clamp(220px, 68vw, 420px)" }}
+      <div
+        className="relative"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Prev / Next — fixed to the whole banner's edges */}
+        <button
+          onClick={() => go(index - 1)}
+          aria-label="Previous slide"
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
         >
-          <button
-            onClick={() => go(index - 1)}
-            aria-label="Previous slide"
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
-          >
-            <ChevronLeft size={18} className="text-[#3C3837]" />
-          </button>
-          <button
-            onClick={() => go(index + 1)}
-            aria-label="Next slide"
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
-          >
-            <ChevronRight size={18} className="text-[#3C3837]" />
-          </button>
+          <ChevronLeft size={19} className="text-[#3C3837]" />
+        </button>
+        <button
+          onClick={() => go(index + 1)}
+          aria-label="Next slide"
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center transition-all"
+        >
+          <ChevronRight size={19} className="text-[#3C3837]" />
+        </button>
 
-          <AnimatePresence mode="wait" custom={dir}>
+        <AnimatePresence mode="wait" custom={dir}>
+          <motion.div
+            key={slide.id}
+            custom={dir}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="flex flex-col items-center"
+          >
+            {/* Heading block — sits ABOVE the image */}
             <motion.div
-              key={slide.id + "-img"}
+              variants={contentVariants}
+              className="text-center max-w-2xl mx-auto pt-14 pb-8 sm:pt-20 sm:pb-10 px-6"
+            >
+              <h1
+                className="text-[32px] sm:text-[46px] lg:text-[56px] font-semibold leading-[1.08] tracking-[-0.02em]"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  color: "#4FC3F7",
+                  textShadow: "0 0 28px rgba(79, 195, 247, 0.35)",
+                }}
+              >
+                {slide.headline}
+              </h1>
+
+              <p className="mt-3.5 text-[14.5px] sm:text-[15px] text-[#3C3837]/60 leading-relaxed">
+                {slide.sub}
+              </p>
+
+              <Link
+                href={slide.href}
+                className="group inline-flex items-center gap-2 mt-6 border border-[#3C3837]/20 hover:border-[#26649A] hover:bg-[#26649A]/[0.04] text-[#3C3837] text-sm font-semibold px-6 py-3 rounded-full transition-all"
+              >
+                {slide.cta}
+                <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </motion.div>
+
+            {/* Wider product image */}
+            {/* Wider product image */}
+            <motion.div
               custom={dir}
               variants={imgVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="w-full h-full rounded-2xl overflow-hidden bg-white shadow-[0_4px_24px_rgba(0,0,0,0.08)] relative"
+              className="relative w-full max-w-[900px] mx-auto px-2"
+              style={{ height: "clamp(260px, 50vw, 480px)" }}
             >
               <Image
                 src={slide.image}
@@ -215,14 +175,30 @@ export default function Hero() {
                 fill
                 priority
                 unoptimized
-                className="object-cover object-center"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-scale-down rounded-2xl"
+                sizes="(max-width: 768px) 60vw, 900px"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.display = "none";
                 }}
               />
             </motion.div>
-          </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Dot indicators */}
+        <div className="flex mt-4 mb-2 items-center justify-center gap-1.5 pb-2">
+          {SLIDES.map((s, i) => (
+            <button
+              key={s.id}
+              onClick={() => go(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className="h-1.5 rounded-full transition-all"
+              style={{
+                width: i === index ? "20px" : "6px",
+                backgroundColor: i === index ? "#4FC3F7" : "rgba(60,56,55,0.18)",
+              }}
+            />
+          ))}
         </div>
       </div>
 
@@ -245,23 +221,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── SOCIAL PROOF ROW ─────────────────────────────────────────────────── */}
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-8 py-3 flex flex-wrap items-center gap-x-5 gap-y-1">
-        <div className="flex items-center gap-1.5">
-          <MapPin size={12} className="text-[#26649A]" />
-          <span className="text-[11px] text-[#3C3837]/50">Lodhran, Punjab · Est. 2019</span>
-        </div>
-        <span className="w-px h-3 bg-[#3C3837]/15 hidden sm:block" />
-        <div className="flex items-center gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={10} fill="#00C2D1" strokeWidth={0} />
-          ))}
-          <span className="ml-1.5 text-[11px] text-[#3C3837]/50">500+ happy customers</span>
-        </div>
-        <span className="w-px h-3 bg-[#3C3837]/15 hidden sm:block" />
-        <span className="text-[11px] text-[#3C3837]/50">Free delivery in Lodhran</span>
-      </div>
-
+     
     </section>
   );
 }

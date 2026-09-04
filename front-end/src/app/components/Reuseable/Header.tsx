@@ -47,32 +47,10 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Utility bar */}
-      <div className="bg-[#3C3837] text-[#F7F8FA] text-xs px-4 sm:px-8 py-1.5 flex justify-between items-center">
-        <div className="flex items-center gap-3 sm:gap-5">
-          <span className="flex items-center gap-1.5 opacity-90">
-            <MapPin size={13} className="text-[#00C2D1] shrink-0" />
-            <span className="hidden xs:inline">Lodhran, Punjab</span>
-            <span className="xs:hidden">Lodhran</span>
-          </span>
-          <a
-            href="tel:+923001234567"
-            className="hidden sm:flex items-center gap-1.5 opacity-90 hover:opacity-70 transition-opacity"
-          >
-            <Phone size={13} className="text-[#00C2D1]" />
-            0300 1234567
-          </a>
-        </div>
-        <span className="flex items-center gap-1.5 opacity-90 text-[11px] sm:text-xs">
-          <ArrowRight size={13} className="text-[#00C2D1] shrink-0" />
-          <span className="hidden sm:inline">Same-day delivery in Lodhran</span>
-          <span className="sm:hidden">Same-day delivery</span>
-        </span>
-      </div>
 
       {/* Main nav */}
       <header
-        className={`sticky top-0 z-50 border-b border-[#3C3837]/[0.08] transition-all duration-300 ${
+        className={`sticky top-0 -mb-12 z-50 border-b border-[#3C3837]/[0.08] transition-all duration-300 ${
           scrolled
             ? "bg-white/90 backdrop-blur-xl backdrop-saturate-150 shadow-[0_4px_24px_rgba(28,75,117,0.08)]"
             : "bg-white/70 backdrop-blur-xl backdrop-saturate-150"
