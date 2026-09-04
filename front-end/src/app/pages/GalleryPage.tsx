@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PageReveal from "../components/Reuseable/PageReveal";
 
 const galleryItems = [
   {
@@ -36,7 +37,8 @@ const galleryItems = [
 
 export default function GalleryPage() {
   return (
-    <main className="bg-[#F7F8FA] text-[#3C3837]">
+    <PageReveal>
+      <main className="bg-[#F7F8FA] text-[#3C3837]">
       <section className="bg-[#26649A]">
         <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-28">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
@@ -145,6 +147,7 @@ export default function GalleryPage() {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </PageReveal>
   );
 }
