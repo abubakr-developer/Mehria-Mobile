@@ -61,10 +61,10 @@ export default function Testimonials() {
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
-            className="bg-white border border-[#3C3837]/[0.06] rounded-2xl p-5 sm:p-6 hover:border-[#26649A]/20 hover:shadow-[0_12px_28px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
+            className="flex flex-col bg-white border border-[#3C3837]/[0.06] rounded-2xl p-5 sm:p-6 hover:border-[#26649A]/20 hover:shadow-[0_12px_28px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
           >
             {/* Stars */}
-            <div className="flex items-center gap-0.5 mb-4">
+            <div className="flex items-center gap-0.5 mt-auto ">
               {[...Array(5)].map((_, si) => (
                 <motion.span
                   key={si}
@@ -78,7 +78,7 @@ export default function Testimonials() {
               ))}
             </div>
 
-            <p className="text-[13px] sm:text-[13.5px] text-[#3C3837]/65 leading-relaxed mb-5">
+            <p className="flex-1 text-[13px] sm:text-[13.5px] text-[#3C3837]/65 leading-relaxed mb-5">
               &ldquo;{t.text}&rdquo;
             </p>
 

@@ -57,9 +57,9 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group bg-[#F7F8FA] rounded-2xl p-3 sm:p-4 border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
+              className="flex flex-col bg-[#F7F8FA] rounded-2xl p-3 sm:p-4 border border-[#3C3837]/[0.05] hover:border-[#26649A]/20 hover:-translate-y-1 hover:shadow-[0_16px_32px_-8px_rgba(28,75,117,0.12)] transition-all duration-300"
             >
-              <Link href={`/products/${product.id}`} className="block">
+              <Link href={`/products/${product.id}`} className="block flex flex-col h-full">
               {/* Image */}
               <div className="relative h-28 sm:h-32 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
                 {product.tag && (
@@ -96,8 +96,8 @@ export default function FeaturedProducts() {
                 </motion.button>
               </div>
 
-              <p className="text-[12px] sm:text-[13.5px] font-medium text-[#3C3837] leading-snug line-clamp-2">{product.name}</p>
-              <div className="flex items-center justify-between mt-1.5">
+              <p className="flex-1 text-[12px] sm:text-[13.5px] font-medium text-[#3C3837] leading-snug line-clamp-2">{product.name}</p>
+              <div className="flex items-center justify-between mt-auto">
                 <p className="text-[13px] sm:text-[14px] font-semibold text-[#26649A]">Rs. {product.price.toLocaleString()}</p>
                 <button
                   onClick={(e) => {
