@@ -1,5 +1,4 @@
 import Hero from "@/app/components/Home/Hero";
-import TrustStrip from "@/app/components/Home/TrustStrip";
 import Categories from "@/app/components/Home/Categories";
 import FeaturedProducts from "@/app/components/Home/Feauturedproducts";
 import Testimonials from "@/app/components/Home/Tesimonials";
@@ -10,7 +9,6 @@ export default function HomePage() {
   return (
     <main className="bg-[#F7F8FA] text-[#3C3837]">
       <Hero />
-      <TrustStrip />
       <Categories />
       <FeaturedProducts />
       <WhyChooseUs/>
