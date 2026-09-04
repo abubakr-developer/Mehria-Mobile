@@ -61,7 +61,7 @@ export default function FeaturedProducts() {
             >
               <Link href={`/products/${product.id}`} className="block flex flex-col h-full">
               {/* Image */}
-              <div className="relative h-28 sm:h-32 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
+              <div className="relative h-40 rounded-xl bg-gradient-to-br from-white to-[#F7F8FA] flex items-center justify-center mb-3 sm:mb-4 overflow-hidden">
                 {product.tag && (
                   <span
                     className="absolute top-2 left-2 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md z-10"
