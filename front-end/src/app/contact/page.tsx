@@ -1,19 +1,15 @@
 import PageReveal from "../components/Reuseable/PageReveal";
-import Image from "next/image";
 
 export default function ContactPage() {
   return (
     <PageReveal>
       <main className="bg-[#F7F8FA] text-[#3C3837]">
       <section className="relative overflow-hidden bg-[#26649A]">
-        <div className="absolute inset-0 z-0 hidden lg:block">
-          <Image
-            src="/imagegs/products/contact.jfif"
-            alt="Mehria Mobiles accessories"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 hidden bg-cover bg-center bg-no-repeat opacity-20 lg:block"
+          style={{ backgroundImage: "url('/imagegs/products/contact.jfif')" }}
+        >
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
