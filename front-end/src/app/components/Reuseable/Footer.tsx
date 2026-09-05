@@ -64,7 +64,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-[#F7F8FA]/65 leading-relaxed max-w-xs">
-              Your trusted mobile accessories shop in Lodhran — chargers, cases,
+              Your trusted mobile accessories shop in Lodhran chargers, cases,
               earbuds, and everything your phone needs, all in one place.
             </p>
 
@@ -145,7 +145,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5 text-sm text-[#F7F8FA]/65">
                 <Clock size={15} className="text-[#00C2D1] shrink-0" />
-                Open daily, 10 AM – 10 PM
+                Open daily, 10 AM To 10 PM
               </li>
             </ul>
 

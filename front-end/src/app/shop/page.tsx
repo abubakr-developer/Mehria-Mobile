@@ -81,7 +81,7 @@ export default function ShopPage() {
             transition={{ duration: 0.55, delay: 0.1 }}
             className="text-sm sm:text-base text-white/55 mt-3 max-w-lg"
           >
-            Genuine mobile accessories — chargers, cases, earbuds, screen
+            Genuine mobile accessories  chargers, cases, earbuds, screen
             protectors and more, all at honest prices.
           </motion.p>
         </div>

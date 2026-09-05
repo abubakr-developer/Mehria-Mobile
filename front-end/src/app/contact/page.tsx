@@ -271,9 +271,9 @@ export default function ContactPage() {
                 <h3 className="font-semibold">Business Hours</h3>
 
                 <p className="mt-2 text-sm text-white/70">
-                  Monday – Saturday
+                  Monday TO Saturday
                   <br />
-                  9:00 AM – 8:00 PM
+                  9:00 AM TO 8:00 PM
                 </p>
               </div>
             </div>

@@ -14,7 +14,7 @@ const features = [
     number: "01",
     title: "Genuine Products",
     description:
-      "Every accessory is sourced from verified suppliers — no fakes, no compromises. What you see is exactly what you get.",
+      "Every accessory is sourced from verified suppliers no fakes, no compromises. What you see is exactly what you get.",
     icon: Award,
   },
   {
@@ -35,7 +35,7 @@ const features = [
     number: "04",
     title: "Customer First",
     description:
-      "Quick responses, same-day delivery, and an easy exchange policy — your satisfaction is our priority.",
+      "Quick responses, same-day delivery, and an easy exchange policy your satisfaction is our priority.",
     icon: HeartHandshake,
   },
 ];
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
 
           <p className="max-w-lg text-[14px] sm:text-base leading-7 text-gray-400 md:ml-auto">
             Mehria Mobiles combines genuine products, unbeatable local prices, and
-            friendly service — making it the #1 choice for mobile accessories in Lodhran.
+            friendly service  making it the #1 choice for mobile accessories in Lodhran.
           </p>
         </motion.div>
 

@@ -139,22 +139,27 @@ export default function Hero() {
     setIndex((next + SLIDES.length) % SLIDES.length);
   }, []);
 
-  // Auto-scroller — advances every 5s, pauses on hover/touch, cleans up properly
+  // Auto-scroller — advances every 2s and pauses during interaction.
   useEffect(() => {
     if (paused) return;
     const id = setInterval(() => {
       setDir(1);
       setIndex((prev) => (prev + 1) % SLIDES.length);
-    }, 5000);
+    }, 2000);
     return () => clearInterval(id);
   }, [paused]);
 
-  const onTouchStart = (e: React.TouchEvent) => (touchStart.current = e.touches[0].clientX);
+  const onTouchStart = (e: React.TouchEvent) => {
+    setPaused(true);
+    touchStart.current = e.touches[0].clientX;
+  };
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStart.current === null) return;
-    const delta = touchStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(delta) > 40) go(index + (delta > 0 ? 1 : -1));
+    if (touchStart.current !== null) {
+      const delta = touchStart.current - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) go(index + (delta > 0 ? 1 : -1));
+    }
     touchStart.current = null;
+    setPaused(false);
   };
 
   const slide = SLIDES[index];

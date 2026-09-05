@@ -5,7 +5,7 @@ import ClientProviders from "./components/Reuseable/ClientProviders";
 import "./globals.css";  
 export const metadata: Metadata = {
   title: {
-    default: "Mehria Mobiles — Mobile Phones & Accessories",
+    default: "Mehria Mobiles  Mobile Phones & Accessories",
     template: "%s | Mehria Mobiles",
   },
 
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Mehria Mobiles — Mobile Phones & Accessories",
+    title: "Mehria Mobiles Mobile Phones & Accessories",
     description:
       "Explore the latest mobile phones, smartphones, and accessories at Mehria Mobiles.",
     images: ["/og-image.jpg"],

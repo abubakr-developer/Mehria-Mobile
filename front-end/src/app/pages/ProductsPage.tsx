@@ -254,7 +254,7 @@ export default function ProductsPage() {
             <span className="text-[#00C2D1]">Best Prices</span>
           </h1>
           <p className="text-white/70 text-[15px] max-w-md mx-auto mb-8">
-            Genuine chargers, earbuds, cases &amp; more — all under one roof at Mehria Mobiles, Lodhran.
+            Genuine chargers, earbuds, cases &amp; more  all under one roof at Mehria Mobiles, Lodhran.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button className="bg-[#00C2D1] hover:bg-[#009aaa] text-[#04342c] font-bold px-8 py-3 rounded-xl transition-colors">
@@ -360,7 +360,7 @@ export default function ProductsPage() {
 
       {/* ── FOOTER ── */}
       <footer className="bg-[#3C3837] text-white/70 text-center text-[12px] py-6 px-4">
-        <p className="font-semibold text-white text-[14px] mb-1">Mehria Mobiles — Lodhran</p>
+        <p className="font-semibold text-white text-[14px] mb-1">Mehria Mobiles Lodhran</p>
         <p>© {new Date().getFullYear()} All rights reserved. Genuine products. Trusted service.</p>
       </footer>
     </div>
