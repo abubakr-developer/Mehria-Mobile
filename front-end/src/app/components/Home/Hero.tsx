@@ -5,8 +5,6 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
-  MapPin,
-  Star,
   ChevronLeft,
   ChevronRight,
   ArrowRight,
@@ -14,57 +12,96 @@ import {
   ShieldCheck,
   Smartphone,
   Headphones,
+  Cable,
+  Battery,
+  type LucideIcon,
 } from "lucide-react";
 
 // ─── Slide data ───────────────────────────────────────────────────────────────
-const SLIDES = [
+// Slides with a `photo` show a real, single-product, licensed photo (Unsplash
+// License — free for commercial use, no attribution required, no watermark).
+// Slides without one fall back to an icon spotlight until a real product shot
+// is ready — swap `photo` in for those the same way once you have one.
+const SLIDES: {
+  id: number;
+  headline: string;
+  sub: string;
+  cta: string;
+  href: string;
+  icon: LucideIcon;
+  accent: string;
+  photo?: string;
+}[] = [
   {
-  id: 1,
-  headline: "Wireless Freedom. Pure Sound.",
-  sub: "Crystal-clear audio with deep bass. 24-hour battery life for all-day listening.",
-  cta: "Shop Earbuds",
-  href: "/shop?cat=earbuds",
-  image: "/imagegs/products/airbuds.webp",
+    id: 1,
+    headline: "Wireless Freedom. Pure Sound.",
+    sub: "Crystal-clear audio with deep bass. 24-hour battery life for all-day listening.",
+    cta: "Shop Earbuds",
+    href: "/shop?cat=earbuds",
+    icon: Headphones,
+    accent: "#4FC3F7",
+    photo:
+      "https://images.unsplash.com/photo-1754142654807-1dfcdc3f7f22?auto=format&fit=crop&q=80&w=1600",
   },
+
   {
     id: 2,
     headline: "Fast Chargers. Real Watts.",
     sub: "65W GaN technology. Full charge before your tea goes cold.",
     cta: "Browse Chargers",
     href: "/shop?cat=chargers",
-    image: "/imagegs/products/charger.webp",
+    icon: BatteryCharging,
+    accent: "#F5A623",
+    photo:
+      "https://images.unsplash.com/photo-1586254116951-5263e2cdb44c?fm=jpg&q=80&w=1600&auto=format&fit=crop",
   },
+
   {
     id: 3,
     headline: "Protect What Matters.",
     sub: "Military-grade cases and 9H tempered glass for every model.",
     cta: "See Protection",
     href: "/shop?cat=cases",
-    image: "/imagegs/products/glass.avif",
+    icon: ShieldCheck,
+    accent: "#4CAF50",
+    photo:
+      "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?fm=jpg&q=80&w=1600&auto=format&fit=crop",
   },
+
   {
     id: 4,
     headline: "Style Meets Protection.",
     sub: "Shockproof cases that look premium. Slim fit with military-grade drop protection.",
     cta: "Browse Cases",
     href: "/shop?cat=phone-cases",
-    image: "/imagegs/products/case.webp",
+    icon: Smartphone,
+    accent: "#9C6ADE",
+    photo:
+      "https://images.unsplash.com/photo-1775544265981-9db0ea58687f?auto=format&fit=crop&q=80&w=1600",
   },
+
   {
     id: 6,
     headline: "Fast Sync. Fast Charge.",
     sub: "Braided nylon Type-C cable. 100W PD support with data transfer speeds up to 480Mbps.",
     cta: "Shop Cables",
     href: "/shop?cat=cables",
-    image: "/imagegs/products/type-c.jpg",
+    icon: Cable,
+    accent: "#26649A",
+    photo:
+      "https://www.belkin.com/on/demandware.static/-/Sites-master-product-catalog-blk/default/dwfe4c2219/images/hi-res/7/5831f56eab9ecb49_CAB004bt0MWH_Gallery5.png",
   },
+
   {
     id: 7,
     headline: "Power That Lasts.",
     sub: "20000mAh portable charger. Fast charges 3 devices simultaneously for days on the go.",
     cta: "Explore Power Banks",
     href: "/shop?cat=power-banks",
-    image: "/imagegs/products/powerbank.webp",
+    icon: Battery,
+    accent: "#E4572E",
+    photo:
+      "https://ziz.ua/image/cache/catalog/foto-tovarov/powerbank/20000mah/58002_5-min-600x600.jpg",
   },
 ];
 
@@ -84,9 +121,9 @@ const contentVariants = {
 };
 
 const imgVariants = {
-  enter: (dir: number) => ({ x: dir > 0 ? 50 : -50, opacity: 0 }),
-  center: { x: 0, opacity: 1, transition: { duration: 0.5, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
-  exit: (dir: number) => ({ x: dir > 0 ? -50 : 50, opacity: 0, transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } }),
+  enter: (dir: number) => ({ x: dir > 0 ? 50 : -50, opacity: 0, scale: 0.94 }),
+  center: { x: 0, opacity: 1, scale: 1, transition: { duration: 0.5, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } },
+  exit: (dir: number) => ({ x: dir > 0 ? -50 : 50, opacity: 0, scale: 0.94, transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] } }),
 };
 
 export default function Hero() {
@@ -108,7 +145,7 @@ export default function Hero() {
     const id = setInterval(() => {
       setDir(1);
       setIndex((prev) => (prev + 1) % SLIDES.length);
-    }, 2000);
+    }, 5000);
     return () => clearInterval(id);
   }, [paused]);
 
@@ -121,6 +158,7 @@ export default function Hero() {
   };
 
   const slide = SLIDES[index];
+  const Icon = slide.icon;
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
@@ -156,7 +194,7 @@ export default function Hero() {
             exit="exit"
             className="flex flex-col items-center"
           >
-            {/* Heading block — sits ABOVE the image */}
+            {/* Heading block — sits ABOVE the visual */}
             <motion.div
               variants={contentVariants}
               className="text-center max-w-2xl mx-auto pt-14 pb-8 sm:pt-20 sm:pb-10 px-6"
@@ -185,26 +223,57 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            {/* Wider product image */}
-            {/* Wider product image */}
+            {/* Product visual — real photo when available, icon spotlight otherwise */}
             <motion.div
               custom={dir}
               variants={imgVariants}
-              className="relative w-full max-w-[900px] mx-auto px-2"
-              style={{ height: "clamp(260px, 50vw, 480px)" }}
+              className="relative w-full max-w-[800px] mx-auto px-2"
+              style={{ height: "clamp(300px, 55vw, 560px)" }}
             >
-              <Image
-                src={slide.image}
-                alt={slide.headline}
-                fill
-                priority
-                unoptimized
-                className="object-scale-down rounded-2xl"
-                sizes="(max-width: 768px) 60vw, 900px"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
-              />
+              {slide.photo ? (
+                <Image
+                  src={slide.photo}
+                  alt={slide.headline}
+                  fill
+                  priority
+                  unoptimized
+                  className="object-cover rounded-2xl"
+                  sizes="(max-width: 768px) 90vw, 1200px"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                />
+              ) : (
+                <div
+                  className="relative w-full h-full rounded-2xl flex items-center justify-center overflow-hidden"
+                  style={{
+                    background: `radial-gradient(circle at 50% 45%, ${slide.accent}22 0%, ${slide.accent}0d 45%, transparent 75%)`,
+                  }}
+                >
+                  <div
+                    className="absolute rounded-full"
+                    style={{
+                      width: "clamp(220px, 34vw, 360px)",
+                      height: "clamp(220px, 34vw, 360px)",
+                      background: `radial-gradient(circle, ${slide.accent}29 0%, transparent 70%)`,
+                    }}
+                  />
+                  <div
+                    className="relative flex items-center justify-center rounded-full shadow-lg"
+                    style={{
+                      width: "clamp(160px, 24vw, 240px)",
+                      height: "clamp(160px, 24vw, 240px)",
+                      backgroundColor: "#FFFFFF",
+                      border: `1px solid ${slide.accent}33`,
+                    }}
+                  >
+                    <Icon
+                      strokeWidth={1.4}
+                      style={{ width: "44%", height: "44%", color: slide.accent }}
+                    />
+                  </div>
+                </div>
+              )}
             </motion.div>
           </motion.div>
         </AnimatePresence>
@@ -244,8 +313,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-     
     </section>
   );
 }
