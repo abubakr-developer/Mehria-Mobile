@@ -1,11 +1,22 @@
 import PageReveal from "../components/Reuseable/PageReveal";
+import Image from "next/image";
 
 export default function ContactPage() {
   return (
     <PageReveal>
       <main className="bg-[#F7F8FA] text-[#3C3837]">
-      <section className="bg-[#26649A]">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <section className="relative overflow-hidden bg-[#26649A]">
+        <div className="absolute inset-0 z-0 hidden lg:block">
+          <Image
+            src="/imagegs/products/contact.jfif"
+            alt="Mehria Mobiles accessories"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
             <span className="inline-block rounded-full bg-[#00C2D1] px-4 py-2 text-sm font-semibold text-white">
               Get In Touch

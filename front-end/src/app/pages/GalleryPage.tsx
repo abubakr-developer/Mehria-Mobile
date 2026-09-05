@@ -41,9 +41,9 @@ export default function GalleryPage() {
       <main className="bg-[#F7F8FA] text-[#3C3837]">
         <section className="relative overflow-hidden bg-[#26649A]">
 
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 hidden lg:block">
             <Image
-              src="/imagegs/products/bg.jfif"
+              src="/imagegs/products/case.jpeg"
               alt="Background"
               fill
               className="object-cover object-left opacity-20"
