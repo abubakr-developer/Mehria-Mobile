@@ -16,7 +16,11 @@ import {
   Star,
   Truck,
 } from "lucide-react";
+<<<<<<< HEAD
 import { motion, Variants } from "framer-motion";
+=======
+import { motion, type Variants } from "framer-motion";
+>>>>>>> 96bfa017debb89f32bbf477595c641b1789b1548
 
 import { products } from "@/app/data/products";
 import { useCart } from "@/app/context/CartContext";
@@ -50,7 +54,7 @@ const fadeUp: Variants = {
     y: 0,
     transition: {
       duration: 0.35,
-      ease: "easeOut",
+      ease: "easeOut" as const,
     },
   },
 };

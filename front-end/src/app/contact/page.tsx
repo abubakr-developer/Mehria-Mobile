@@ -4,8 +4,15 @@ export default function ContactPage() {
   return (
     <PageReveal>
       <main className="bg-[#F7F8FA] text-[#3C3837]">
-      <section className="bg-[#26649A]">
-        <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
+      <section className="relative overflow-hidden bg-[#26649A]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 hidden bg-cover bg-center bg-no-repeat opacity-20 lg:block"
+          style={{ backgroundImage: "url('/imagegs/products/contact.jfif')" }}
+        >
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 lg:py-24">
           <div className="max-w-3xl">
             <span className="inline-block rounded-full bg-[#00C2D1] px-4 py-2 text-sm font-semibold text-white">
               Get In Touch

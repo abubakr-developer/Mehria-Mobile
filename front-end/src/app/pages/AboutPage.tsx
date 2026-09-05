@@ -6,9 +6,9 @@ export default function AboutPage() {
     <PageReveal>
       <main className="bg-[#F7F8FA] text-[#3C3837]">
         <section className="relative overflow-hidden bg-[#26649A]">
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 hidden lg:block">
             <Image
-              src="/imagegs/products/case.webp"
+              src="/imagegs/products/background(1).webp"
               alt="Background"
               fill
               className="object-cover opacity-20"

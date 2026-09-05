@@ -231,6 +231,16 @@ export default function ProductsPage() {
 
       {/* ── HERO BANNER ── */}
       <section className="bg-gradient-to-br from-[#26649A] to-[#1C4B75] py-14 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 hidden lg:block">
+          <Image
+            src="/imagegs/products/productbg(1).webp"
+            alt="Mobile accessories"
+            fill
+            className="object-cover opacity-20"
+            priority
+          />
+        </div>
+
         {/* Decorative circles */}
         <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#00C2D1] opacity-10 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-[#00C2D1] opacity-5" />

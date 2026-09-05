@@ -227,13 +227,13 @@ export default function Hero() {
             <motion.div
               custom={dir}
               variants={imgVariants}
-              className="relative w-full max-w-[800px] mx-auto px-2"
+              className="relative w-full max-w-[600px] mx-auto px-2"
               style={{ height: "clamp(300px, 55vw, 560px)" }}
             >
               {slide.photo ? (
                 <Image
                   src={slide.photo}
-                  alt={slide.headline}
+                  alt={slide.headline} 
                   fill
                   priority
                   unoptimized
