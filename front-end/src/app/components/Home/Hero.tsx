@@ -232,8 +232,8 @@ export default function Hero() {
             <motion.div
               custom={dir}
               variants={imgVariants}
-              className="relative w-full max-w-[600px] mx-auto px-2"
-              style={{ height: "clamp(300px, 55vw, 560px)" }}
+              className="relative w-full max-w-[900px]  mx-auto px-2"
+              style={{ height: "clamp(240px, 44vw, 440px)" }}
             >
               {slide.photo ? (
                 <Image
