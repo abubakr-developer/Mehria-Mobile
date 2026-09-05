@@ -33,7 +33,7 @@ const PRODUCTS: Product[] = [
     category: "Audio",
     tag: "Popular",
     image: "/imagegs/products/2.jfif",
-    description: "Active noise cancellation with 30-hour total battery life.",
+    description: "Active noise cancellation with 30 hour total battery life.",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const PRODUCTS: Product[] = [
     category: "Cases",
     tag: "Sale",
     image: "/imagegs/products/3.jfif",
-    description: "Military-grade drop protection, slim profile design.",
+    description: "Military grade drop protection, slim profile design.",
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const PRODUCTS: Product[] = [
     category: "Accessories",
     tag: "New",
     image: "/imagegs/products/4.png",
-    description: "9H hardness, ultra-clear oleophobic coating. Pack of 2.",
+    description: "9H hardness, ultra clear oleophobic coating. Pack of 2.",
   },
   {
     id: 5,
@@ -350,7 +350,7 @@ export default function ProductsPage() {
         <div>
           <h3 className="text-white text-2xl font-extrabold mb-1">Visit Us in Lodhran</h3>
           <p className="text-white/70 text-[14px]">
-            Shop in-store for hands-on demos and same-day deals at Mehria Mobiles.
+            Shop in-store for hands on demos and same day deals at Mehria Mobiles.
           </p>
         </div>
         <button className="bg-[#00C2D1] hover:bg-[#009aaa] text-[#04342c] font-bold px-8 py-3 rounded-xl whitespace-nowrap transition-colors">

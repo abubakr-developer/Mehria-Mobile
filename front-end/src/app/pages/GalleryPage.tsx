@@ -120,7 +120,7 @@ export default function GalleryPage() {
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-[#1C4B75]">{item.title}</h3>
                   <p className="mt-3 text-sm leading-6 text-[#3C3837]/70">
-                    High-quality mobile essentials selected to support retailers and
+                    High quality mobile essentials selected to support retailers and
                     everyday customers looking for dependable accessories.
                   </p>
 

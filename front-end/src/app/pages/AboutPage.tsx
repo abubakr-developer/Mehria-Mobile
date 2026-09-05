@@ -224,7 +224,7 @@ export default function AboutPage() {
                 },
                 {
                   title: "Competitive Pricing",
-                  text: "Wholesale-focused pricing helps retailers maintain competitive margins.",
+                  text: "Wholesale focused pricing helps retailers maintain competitive margins.",
                 },
                 {
                   title: "Wide Selection",
