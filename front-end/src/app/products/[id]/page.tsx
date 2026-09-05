@@ -16,7 +16,7 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 import { products } from "@/app/data/products";
 import { useCart } from "@/app/context/CartContext";
@@ -40,7 +40,7 @@ const featureBadges = [
   },
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: {
     opacity: 0,
     y: 18,
