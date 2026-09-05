@@ -16,11 +16,7 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-<<<<<<< HEAD
-import { motion, Variants } from "framer-motion";
-=======
 import { motion, type Variants } from "framer-motion";
->>>>>>> 96bfa017debb89f32bbf477595c641b1789b1548
 
 import { products } from "@/app/data/products";
 import { useCart } from "@/app/context/CartContext";
