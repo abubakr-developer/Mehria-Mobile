@@ -35,7 +35,7 @@ const SLIDES: {
   {
     id: "earbuds",
     headline: "Wireless Freedom. Pure Sound.",
-    sub: "Crystal-clear audio with deep bass. 24-hour battery life for all-day listening.",
+    sub: "Crystal clear audio with deep bass. 24-hour battery life for all day listening.",
     cta: "Shop Earbuds",
     href: "/shop?cat=earbuds",
     icon: Headphones,
@@ -55,7 +55,7 @@ const SLIDES: {
   {
     id: "phone-case",
     headline: "Protect What Matters.",
-    sub: "Shockproof, military-grade cases and 9H tempered glass for every model.",
+    sub: "Shockproof, military grade cases and 9H tempered glass for every model.",
     cta: "See Protection",
     href: "/shop?cat=phone-cases",
     icon: ShieldCheck,
@@ -75,7 +75,7 @@ const SLIDES: {
   {
     id: "earphones",
     headline: "Everyday Clarity, Wired In.",
-    sub: "Reliable wired earphones with crisp highs and a comfortable in-ear fit.",
+    sub: "Reliable wired earphones with crisp highs and a comfortable in ear fit.",
     cta: "Shop Earphones",
     href: "/shop?cat=earphones",
     icon: Ear,
@@ -85,7 +85,7 @@ const SLIDES: {
   {
     id: "smart-watch",
     headline: "Time, Health, Notifications.",
-    sub: "Track your day and stay connected with a vibrant always-on display.",
+    sub: "Track your day and stay connected with a vibrant always on display.",
     cta: "Shop Smart Watches",
     href: "/shop?cat=smart-watches",
     icon: Watch,
@@ -94,7 +94,7 @@ const SLIDES: {
   },
   {
     id: "mobile-holder",
-    headline: "Hands-Free, Any Angle.",
+    headline: "Hands Free, Any Angle.",
     sub: "Sturdy, adjustable mobile holders for your desk, car, or bedside.",
     cta: "Shop Mobile Holders",
     href: "/shop?cat=mobile-holders",
