@@ -12,96 +12,105 @@ import {
   ShieldCheck,
   Smartphone,
   Headphones,
-  Cable,
   Battery,
+  Ear,
+  Watch,
+  Camera,
   type LucideIcon,
 } from "lucide-react";
 
 // ─── Slide data ───────────────────────────────────────────────────────────────
-// Slides with a `photo` show a real, single-product, licensed photo (Unsplash
-// License — free for commercial use, no attribution required, no watermark).
-// Slides without one fall back to an icon spotlight until a real product shot
-// is ready — swap `photo` in for those the same way once you have one.
+// Each slide's `id` is now a stable product-category slug (used for the React
+// key, and handy for analytics/CMS lookups) instead of an arbitrary number.
 const SLIDES: {
-  id: number;
+  id: string;
   headline: string;
   sub: string;
   cta: string;
   href: string;
   icon: LucideIcon;
   accent: string;
-  photo?: string;
+  photo: string;
 }[] = [
   {
-    id: 1,
+    id: "earbuds",
     headline: "Wireless Freedom. Pure Sound.",
     sub: "Crystal-clear audio with deep bass. 24-hour battery life for all-day listening.",
     cta: "Shop Earbuds",
     href: "/shop?cat=earbuds",
     icon: Headphones,
     accent: "#4FC3F7",
-    photo:
-      "https://images.unsplash.com/photo-1754142654807-1dfcdc3f7f22?auto=format&fit=crop&q=80&w=1600",
+    photo: "/imagegs/products/eb.jpeg",
   },
-
   {
-    id: 2,
+    id: "fast-charger",
     headline: "Fast Chargers. Real Watts.",
     sub: "65W GaN technology. Full charge before your tea goes cold.",
     cta: "Browse Chargers",
     href: "/shop?cat=chargers",
     icon: BatteryCharging,
     accent: "#F5A623",
-    photo:
-      "https://images.unsplash.com/photo-1586254116951-5263e2cdb44c?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+    photo: "/imagegs/products/c.jpeg",
   },
-
   {
-    id: 3,
+    id: "phone-case",
     headline: "Protect What Matters.",
-    sub: "Military-grade cases and 9H tempered glass for every model.",
+    sub: "Shockproof, military-grade cases and 9H tempered glass for every model.",
     cta: "See Protection",
-    href: "/shop?cat=cases",
+    href: "/shop?cat=phone-cases",
     icon: ShieldCheck,
     accent: "#4CAF50",
-    photo:
-      "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?fm=jpg&q=80&w=1600&auto=format&fit=crop",
+    photo: "/imagegs/products/pc.jpeg",
   },
-
   {
-    id: 4,
-    headline: "Style Meets Protection.",
-    sub: "Shockproof cases that look premium. Slim fit with military-grade drop protection.",
-    cta: "Browse Cases",
-    href: "/shop?cat=phone-cases",
-    icon: Smartphone,
-    accent: "#9C6ADE",
-    photo:
-      "https://images.unsplash.com/photo-1775544265981-9db0ea58687f?auto=format&fit=crop&q=80&w=1600",
-  },
-
-  {
-    id: 6,
-    headline: "Fast Sync. Fast Charge.",
-    sub: "Braided nylon Type-C cable. 100W PD support with data transfer speeds up to 480Mbps.",
-    cta: "Shop Cables",
-    href: "/shop?cat=cables",
-    icon: Cable,
-    accent: "#26649A",
-    photo:
-      "https://www.belkin.com/on/demandware.static/-/Sites-master-product-catalog-blk/default/dwfe4c2219/images/hi-res/7/5831f56eab9ecb49_CAB004bt0MWH_Gallery5.png",
-  },
-
-  {
-    id: 7,
+    id: "powerbank",
     headline: "Power That Lasts.",
     sub: "20000mAh portable charger. Fast charges 3 devices simultaneously for days on the go.",
     cta: "Explore Power Banks",
     href: "/shop?cat=power-banks",
     icon: Battery,
     accent: "#E4572E",
-    photo:
-      "https://ziz.ua/image/cache/catalog/foto-tovarov/powerbank/20000mah/58002_5-min-600x600.jpg",
+    photo: "/imagegs/products/pb.jpeg",
+  },
+  {
+    id: "earphones",
+    headline: "Everyday Clarity, Wired In.",
+    sub: "Reliable wired earphones with crisp highs and a comfortable in-ear fit.",
+    cta: "Shop Earphones",
+    href: "/shop?cat=earphones",
+    icon: Ear,
+    accent: "#26649A",
+    photo: "/imagegs/products/earphones.jpeg",
+  },
+  {
+    id: "smart-watch",
+    headline: "Time, Health, Notifications.",
+    sub: "Track your day and stay connected with a vibrant always-on display.",
+    cta: "Shop Smart Watches",
+    href: "/shop?cat=smart-watches",
+    icon: Watch,
+    accent: "#9C6ADE",
+    photo: "/imagegs/products/sw.jpeg",
+  },
+  {
+    id: "mobile-holder",
+    headline: "Hands-Free, Any Angle.",
+    sub: "Sturdy, adjustable mobile holders for your desk, car, or bedside.",
+    cta: "Shop Mobile Holders",
+    href: "/shop?cat=mobile-holders",
+    icon: Smartphone,
+    accent: "#607D8B",
+    photo: "/imagegs/products/ph.jpeg",
+  },
+  {
+    id: "selfie-stick",
+    headline: "Get The Whole Shot.",
+    sub: "Extendable, Bluetooth-ready selfie sticks for group shots and vlogging.",
+    cta: "Shop Selfie Sticks",
+    href: "/shop?cat=selfie-sticks",
+    icon: Camera,
+    accent: "#E91E63",
+    photo: "/imagegs/products/ss.jpeg",
   },
 ];
 
@@ -132,7 +141,10 @@ export default function Hero() {
   const [paused, setPaused] = useState(false);
   const touchStart = useRef<number | null>(null);
   const indexRef = useRef(index);
-  indexRef.current = index;
+
+  useEffect(() => {
+    indexRef.current = index;
+  }, [index]);
 
   const go = useCallback((next: number) => {
     setDir(next > indexRef.current ? 1 : -1);
@@ -163,7 +175,6 @@ export default function Hero() {
   };
 
   const slide = SLIDES[index];
-  const Icon = slide.icon;
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
@@ -228,57 +239,21 @@ export default function Hero() {
               </Link>
             </motion.div>
 
-            {/* Product visual — real photo when available, icon spotlight otherwise */}
+            {/* Product visual — local, statically-imported product photo */}
             <motion.div
               custom={dir}
               variants={imgVariants}
-              className="relative w-full max-w-[900px]  mx-auto px-2"
+              className="relative w-full max-w-[900px] mx-auto px-2"
               style={{ height: "clamp(240px, 44vw, 440px)" }}
             >
-              {slide.photo ? (
-                <Image
-                  src={slide.photo}
-                  alt={slide.headline} 
-                  fill
-                  priority
-                  unoptimized
-                  className="object-cover rounded-2xl"
-                  sizes="(max-width: 768px) 90vw, 1200px"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = "none";
-                  }}
-                />
-              ) : (
-                <div
-                  className="relative w-full h-full rounded-2xl flex items-center justify-center overflow-hidden"
-                  style={{
-                    background: `radial-gradient(circle at 50% 45%, ${slide.accent}22 0%, ${slide.accent}0d 45%, transparent 75%)`,
-                  }}
-                >
-                  <div
-                    className="absolute rounded-full"
-                    style={{
-                      width: "clamp(220px, 34vw, 360px)",
-                      height: "clamp(220px, 34vw, 360px)",
-                      background: `radial-gradient(circle, ${slide.accent}29 0%, transparent 70%)`,
-                    }}
-                  />
-                  <div
-                    className="relative flex items-center justify-center rounded-full shadow-lg"
-                    style={{
-                      width: "clamp(160px, 24vw, 240px)",
-                      height: "clamp(160px, 24vw, 240px)",
-                      backgroundColor: "#FFFFFF",
-                      border: `1px solid ${slide.accent}33`,
-                    }}
-                  >
-                    <Icon
-                      strokeWidth={1.4}
-                      style={{ width: "44%", height: "44%", color: slide.accent }}
-                    />
-                  </div>
-                </div>
-              )}
+              <Image
+                src={slide.photo}
+                alt={slide.headline}
+                fill
+                priority
+                className="rounded-2xl bg-white object-contain p-4 sm:p-6"
+                sizes="(max-width: 768px) 90vw, 1200px"
+              />
             </motion.div>
           </motion.div>
         </AnimatePresence>
