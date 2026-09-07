@@ -220,7 +220,6 @@ export default function Hero() {
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
                   color: "#4FC3F7",
-                  textShadow: "0 0 28px rgba(79, 195, 247, 0.35)",
                 }}
               >
                 {slide.headline}
