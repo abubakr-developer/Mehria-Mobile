@@ -40,7 +40,7 @@ const SLIDES: {
     href: "/shop?cat=earbuds",
     icon: Headphones,
     accent: "#4FC3F7",
-    photo: "/imagegs/products/eb.jpeg",
+    photo: "/imagegs/heroscrollerimg/earbuds.jpeg",
   },
   {
     id: "fast-charger",
@@ -50,7 +50,7 @@ const SLIDES: {
     href: "/shop?cat=chargers",
     icon: BatteryCharging,
     accent: "#F5A623",
-    photo: "/imagegs/products/c.jpeg",
+    photo: "/imagegs/heroscrollerimg/charger.jpeg",
   },
   {
     id: "phone-case",
@@ -60,7 +60,7 @@ const SLIDES: {
     href: "/shop?cat=phone-cases",
     icon: ShieldCheck,
     accent: "#4CAF50",
-    photo: "/imagegs/products/pc.jpeg",
+    photo: "/imagegs/heroscrollerimg/phone_cases.jpeg",
   },
   {
     id: "powerbank",
@@ -70,7 +70,7 @@ const SLIDES: {
     href: "/shop?cat=power-banks",
     icon: Battery,
     accent: "#E4572E",
-    photo: "/imagegs/products/pb.jpeg",
+    photo: "/imagegs/heroscrollerimg/power_bank.jpeg",
   },
   {
     id: "earphones",
@@ -80,7 +80,7 @@ const SLIDES: {
     href: "/shop?cat=earphones",
     icon: Ear,
     accent: "#26649A",
-    photo: "/imagegs/products/earphones.jpeg",
+    photo: "/imagegs/heroscrollerimg/headphones.jpeg",
   },
   {
     id: "smart-watch",
@@ -90,7 +90,7 @@ const SLIDES: {
     href: "/shop?cat=smart-watches",
     icon: Watch,
     accent: "#9C6ADE",
-    photo: "/imagegs/products/sw.jpeg",
+    photo: "/imagegs/heroscrollerimg/apple_watch.jpeg",
   },
   {
     id: "mobile-holder",
@@ -100,7 +100,7 @@ const SLIDES: {
     href: "/shop?cat=mobile-holders",
     icon: Smartphone,
     accent: "#607D8B",
-    photo: "/imagegs/products/ph.jpeg",
+    photo: "/imagegs/heroscrollerimg/phone_stand.jpeg",
   },
   {
     id: "selfie-stick",
@@ -110,7 +110,7 @@ const SLIDES: {
     href: "/shop?cat=selfie-sticks",
     icon: Camera,
     accent: "#E91E63",
-    photo: "/imagegs/products/ss.jpeg",
+    photo: "/imagegs/heroscrollerimg/selfie_stick.jpeg",
   },
 ];
 
@@ -177,7 +177,7 @@ export default function Hero() {
   const slide = SLIDES[index];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#F7F8FA] to-white">
+    <section className="relative overflow-hidden bg-[#FFFFFF]">
       <div
         className="relative"
         onMouseEnter={() => setPaused(true)}
@@ -213,7 +213,7 @@ export default function Hero() {
             {/* Heading block — sits ABOVE the visual */}
             <motion.div
               variants={contentVariants}
-              className="text-center max-w-2xl mx-auto pt-14 pb-8 sm:pt-20 sm:pb-10 px-6"
+              className="text-center max-w-2xl mx-auto pt-14 pb-2 sm:pt-20 sm:pb-4 px-6"
             >
               <h1
                 className="text-[32px] sm:text-[46px] lg:text-[56px] font-semibold leading-[1.08] tracking-[-0.02em]"
@@ -243,7 +243,7 @@ export default function Hero() {
             <motion.div
               custom={dir}
               variants={imgVariants}
-              className="relative w-full max-w-[900px] mx-auto px-2"
+              className="relative -mt-2 sm:-mt-4 w-full max-w-[900px] mx-auto px-2"
               style={{ height: "clamp(240px, 44vw, 440px)" }}
             >
               <Image
@@ -251,7 +251,7 @@ export default function Hero() {
                 alt={slide.headline}
                 fill
                 priority
-                className="rounded-2xl bg-white object-contain p-4 sm:p-6"
+                className="rounded-2xl bg-[#FFFFFF]  object-contain p-4 sm:p-6"
                 sizes="(max-width: 768px) 90vw, 1200px"
               />
             </motion.div>
