@@ -15,18 +15,18 @@ export default function VisitCTA() {
       >
         <div className="relative flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-start gap-5 sm:gap-6 lg:gap-5 max-w-lg text-center sm:text-left">
           {/* Quiet geometric anchor — no color, no blur, just a thin ring */}
-          <div className="flex-shrink-0 w-12 h-12 rounded-full border border-[#3C3837]/20 flex items-center justify-center">
-            <MapPin size={18} className="text-[#3C3837]/80" />
+          <div className="flex-shrink-0 w-12 h-12 rounded-full border border-white/50 flex items-center justify-center">
+            <MapPin size={18} className="text-white" />
           </div>
 
           <div>
             <h2
-              className="text-[22px] sm:text-[26px] lg:text-[32px] font-semibold text-[#3C3837] leading-tight tracking-tight"
+              className="text-[22px] sm:text-[26px] lg:text-[32px] font-semibold text-white leading-tight tracking-tight"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
               Prefer to see it in person?
             </h2>
-            <p className="text-[13px] sm:text-[14px] text-[#3C3837]/70 mt-3 leading-relaxed">
+            <p className="text-[13px] sm:text-[14px] text-white mt-3 leading-relaxed">
               Visit our shop in Main Bazaar, Lodhran check the quality
               yourself before you buy, seven days a week.
             </p>
@@ -40,18 +40,18 @@ export default function VisitCTA() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
+            className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-2 border border-white/80 bg-transparent hover:bg-white hover:text-[#3FA8D1] text-white text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
           >
-            <MapPin size={16} />
+            <MapPin size={16} className="text-white" />
             Get directions
           </motion.a>
           <motion.a
             href="tel:+923001234567"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-2 border border-[#3C3837]/20 hover:border-[#3C3837]/40 text-[#3C3837] text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
+            className="flex-1 lg:flex-initial inline-flex items-center justify-center gap-2 border border-white/80 hover:border-white hover:bg-white hover:text-[#3FA8D1] text-white text-sm font-semibold px-6 py-3.5 rounded-xl transition-colors"
           >
-            <Phone size={15} />
+            <Phone size={15} className="text-white" />
             Call us
           </motion.a>
         </div>

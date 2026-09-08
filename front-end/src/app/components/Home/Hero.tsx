@@ -216,18 +216,14 @@ export default function Hero() {
               className="text-center max-w-2xl mx-auto pt-14 pb-2 sm:pt-20 sm:pb-4 px-6"
             >
               <h1
-                className="text-[32px] sm:text-[46px] lg:text-[56px] font-semibold leading-[1.08] tracking-[-0.02em]"
+                className="text-[12px] sm:text-[46px] lg:text-[33px] font-semibold leading-[1.08] tracking-[-0.02em]"
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
                   color: "#4FC3F7",
                 }}
               >
-                {slide.headline}
+                {slide.headline} {slide.sub}
               </h1>
-
-              <p className="mt-3.5 text-[14.5px] sm:text-[15px] text-[#3C3837]/60 leading-relaxed">
-                {slide.sub}
-              </p>
 
               <Link
                 href={slide.href}
