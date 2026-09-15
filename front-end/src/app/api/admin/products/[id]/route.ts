@@ -12,7 +12,13 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   try {
     const { id } = await params;
     await connectToDatabase();
-    const product = await Product.findById(id).lean();
+    
+    let query: Record<string, unknown> = { _id: id };
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      query = { id: Number(id) };
+    }
+
+    const product = await Product.findOne(query).lean();
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
@@ -32,7 +38,13 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const body = await request.json();
     await connectToDatabase();
-    const product = await Product.findByIdAndUpdate(id, body, { new: true });
+
+    let query: Record<string, unknown> = { _id: id };
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      query = { id: Number(id) };
+    }
+
+    const product = await Product.findOneAndUpdate(query, body, { new: true });
     if (!product) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
@@ -51,7 +63,16 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
   try {
     const { id } = await params;
     await connectToDatabase();
-    await Product.findByIdAndDelete(id);
+
+    let query: Record<string, unknown> = { _id: id };
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+      query = { id: Number(id) };
+    }
+
+    const deleted = await Product.findOneAndDelete(query);
+    if (!deleted) {
+      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+    }
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Unable to delete product" }, { status: 500 });

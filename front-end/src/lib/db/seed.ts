@@ -1,6 +1,4 @@
-import bcrypt from "bcryptjs";
 import { connectToDatabase } from "./mongodb";
-import { User } from "../models/User";
 import { Product } from "../models/Product";
 import { Category } from "../models/Category";
 import { StoreSetting } from "../models/StoreSetting";
@@ -15,41 +13,7 @@ export async function seedDatabaseIfNeeded() {
   try {
     await connectToDatabase();
 
-    // 1. Seed Super Admin & Staff Users
-    const adminEmail = (
-      process.env.DEFAULT_ADMIN_EMAIL || "admin@mehriamobiles.com"
-    ).toLowerCase();
-    const existingAdmin = await User.findOne({ email: adminEmail });
-
-    if (!existingAdmin) {
-      const adminPassword =
-        process.env.DEFAULT_ADMIN_PASSWORD || "Admin@123456";
-      const hashedPassword = await bcrypt.hash(adminPassword, 10);
-
-      await User.create({
-        name: process.env.DEFAULT_ADMIN_NAME || "Mehria Admin",
-        email: adminEmail,
-        password: hashedPassword,
-        role: "admin",
-        isActive: true,
-      });
-      console.log(`[Seed] Created initial super admin: ${adminEmail}`);
-    }
-
-    // Seed test staff user
-    const staffEmail = "staff@mehriamobiles.com";
-    const existingStaff = await User.findOne({ email: staffEmail });
-    if (!existingStaff) {
-      const hashedStaffPassword = await bcrypt.hash("Staff@123456", 10);
-      await User.create({
-        name: "Mehria Staff",
-        email: staffEmail,
-        password: hashedStaffPassword,
-        role: "staff",
-        isActive: true,
-      });
-      console.log(`[Seed] Created initial staff member: ${staffEmail}`);
-    }
+    // 1. Seed Categories (Products and categories are seeded if empty)
 
     // 2. Seed Categories
     const categoryCount = await Category.countDocuments();

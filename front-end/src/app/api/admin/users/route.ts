@@ -27,17 +27,43 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
+    if (!body.name || !body.email || !body.password) {
+      return NextResponse.json({ error: "Name, email, and password are required" }, { status: 400 });
+    }
+
+    const email = String(body.email).trim().toLowerCase();
+    const role = body.role === "admin" ? "admin" : "staff";
+
     await connectToDatabase();
-    const passwordHash = await bcrypt.hash(body.password || "Admin@123456", 10);
+
+    if (role === "admin") {
+      const existingAdmin = await User.findOne({ role: "admin" });
+      if (existingAdmin) {
+        return NextResponse.json(
+          { error: "Only 1 administrator account is allowed. Create a staff account instead." },
+          { status: 400 }
+        );
+      }
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json({ error: "A user with this email already exists" }, { status: 400 });
+    }
+
+    const passwordHash = await bcrypt.hash(body.password, 10);
     const user = await User.create({
-      name: body.name,
-      email: String(body.email).trim().toLowerCase(),
+      name: body.name.trim(),
+      email,
       password: passwordHash,
-      role: body.role || "staff",
+      role,
       isActive: body.isActive !== false,
     });
 
-    return NextResponse.json({ success: true, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    return NextResponse.json({
+      success: true,
+      user: { id: user._id, name: user.name, email: user.email, role: user.role, isActive: user.isActive },
+    });
   } catch (error) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Unable to create user" }, { status: 500 });
   }
