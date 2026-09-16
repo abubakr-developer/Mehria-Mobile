@@ -5,6 +5,7 @@ import ClientProviders from "./components/Reuseable/ClientProviders";
 import RouteTransition from "./components/Reuseable/RouteTransition";
 import "./globals.css";  
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: {
     default: "Mehria Mobiles  Mobile Phones & Accessories",
     template: "%s | Mehria Mobiles",
