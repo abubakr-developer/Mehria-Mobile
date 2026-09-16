@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/app/components/Reuseable/Header"
 import Footer from "./components/Reuseable/Footer";
 import ClientProviders from "./components/Reuseable/ClientProviders";
+import RouteTransition from "./components/Reuseable/RouteTransition";
 import "./globals.css";  
 export const metadata: Metadata = {
   title: {
@@ -77,7 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <ClientProviders>
         <Header/>
-        {children}
+        <RouteTransition>{children}</RouteTransition>
         <Footer/>
         </ClientProviders>
         </body>
